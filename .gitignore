@@ -1,3 +1,12 @@
-# files not important for the project
+# Personal logs
 logs.md
+00-update_enviroment_yml.py
+
+# macOS system files
 .DS_Store
+
+
+**/.ipynb_checkpoints/
+.history/
+.vscode/
+*.code-workspace
