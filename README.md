@@ -14,32 +14,23 @@ The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](h
 ### Developer dependencies
 To run this project, the following tools and Python packages are required:
 
-- **Python**  
-  https://www.python.org/
+- [*Python*](https://www.python.org/)
 
-- **IPython**  
-  https://ipython.readthedocs.io/
+- [*IPython*](https://ipython.readthedocs.io/)
 
-- **IPyKernel**  
-  https://ipykernel.readthedocs.io/
+- [*IPyKernel*](https://ipykernel.readthedocs.io/)
 
-- **Matplotlib**  
-  https://matplotlib.org/
+- [*Matplotlib*](https://matplotlib.org/)
 
-- **Pandas**  
-  https://pandas.pydata.org/
+- [*Pandas*](https://pandas.pydata.org/)
 
-- **Scikit-learn**  
-  https://scikit-learn.org/
+- [*Scikit-learn*](https://scikit-learn.org/)
 
-- **Altair**  
-  https://altair-viz.github.io/
+- [*Altair*](https://altair-viz.github.io/)
 
-- **Pip**  
-  https://pip.pypa.io/
+- [*Pip*](https://pip.pypa.io/)
 
-- **Conda**  
-  https://docs.conda.io/
+- [*Conda*](https://docs.conda.io/)
 
 ## License
 
