@@ -27,7 +27,7 @@ To launch the analysis, run:
 jupyter lab
 ```
 Then open the notebook:
-Open `sleep-disorder-analysis.ipynb` in Jupyter Lab and select the correct kernel.
+Open `sleep-disorder-analysis.ipynb` in Jupyter Lab, go to Kernel, then Select Kernel, and choose Python `[conda env:dsci522]`.
 
 
 ## Dependencies
@@ -39,17 +39,21 @@ To run this project, the following tools and Python packages are required:
 
 - [*IPyKernel*](https://ipykernel.readthedocs.io/) (version=6.30.1 or higher)
 
-- [*Matplotlib*](https://matplotlib.org/) (version=3.10.6 or higher)
-
 - [*Pandas*](https://pandas.pydata.org/) (version=2.3.2 or higher)
 
 - [*Scikit-learn*](https://scikit-learn.org/) (version=1.7.2 or higher)
 
 - [*Altair*](https://altair-viz.github.io/) (version=6.0.0 or higher)
 
+- [*Matplotlib*](https://matplotlib.org/) (version=3.10.6 or higher)
+
+- [*Seaborn*](https://seaborn.pydata.org/) (version=0.13.2 or higher)
+
+- [*SciencePlots*](https://github.com/garrettj403/SciencePlots) (version=2.2.0 or higher)
+
 - [*Pip*](https://pip.pypa.io/) (version=25.2 or higher)
 
-- [*Conda*](https://docs.conda.io/)
+- [*Conda*](https://docs.conda.io/)  
 
 ## License
 
