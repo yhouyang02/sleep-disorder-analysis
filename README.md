@@ -1,7 +1,11 @@
 # Predicting Stress from Sleep and Lifestyle Factors
 
-- by Yuheng Ouyang, Eduardo Rivera, Harpreet Singh, Songyang Yu
-  Demo of a data analysis project for DSCI 522 (Data Science workflows); a course in the Master of Data Science program at the University of British Columbia.
+- Yuheng Ouyang  
+- Eduardo Rivera  
+- Harpreet Singh  
+- Songyang (Norton) Yu  
+
+This repository contains our data analysis project for DSCI 522 (Data Science Workflows)
 
 ## About
 
@@ -9,26 +13,41 @@ In this project we aim to develop a regression model that uses sleep-related, li
 
 The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](https://www.kaggle.com/datasets/varishabatool/disorder) (Varishabatool n.d.), sourced from Kaggle. Each row represents one individual's self-reported information, including sleep duration, sleep quality, physical activity frequency, occupation type, BMI category, blood pressure category, resting heart rate, daily steps, and numeric stress level. Because the dataset combines behavioral, demographic, and physiological variables, it provides an opportunity to explore how multiple aspects of daily life relate to stress. These structured features also make the dataset suitable for regression modeling aimed at understanding and predicting stress levels.
 
-## Developer Notes
+## How to run the data analysis
+First time running the project, run the following from the root of this repository:
+```bash
+conda env create -f environment.yml
+```
+Then activate the environment:
+```bash
+conda activate dsci522
+```
+To launch the analysis, run:
+```bash
+jupyter lab
+```
+Then open the notebook:
+Open `sleep-disorder-analysis.ipynb` in Jupyter Lab and select the correct kernel.
 
-### Developer dependencies
+
+## Dependencies
 To run this project, the following tools and Python packages are required:
 
-- [*Python*](https://www.python.org/)
+- [*Python*](https://www.python.org/) (version=3.12.11 or higher)
 
-- [*IPython*](https://ipython.readthedocs.io/)
+- [*IPython*](https://ipython.readthedocs.io/) (version=9.5.0 or higher)
 
-- [*IPyKernel*](https://ipykernel.readthedocs.io/)
+- [*IPyKernel*](https://ipykernel.readthedocs.io/) (version=6.30.1 or higher)
 
-- [*Matplotlib*](https://matplotlib.org/)
+- [*Matplotlib*](https://matplotlib.org/) (version=3.10.6 or higher)
 
-- [*Pandas*](https://pandas.pydata.org/)
+- [*Pandas*](https://pandas.pydata.org/) (version=2.3.2 or higher)
 
-- [*Scikit-learn*](https://scikit-learn.org/)
+- [*Scikit-learn*](https://scikit-learn.org/) (version=1.7.2 or higher)
 
-- [*Altair*](https://altair-viz.github.io/)
+- [*Altair*](https://altair-viz.github.io/) (version=6.0.0 or higher)
 
-- [*Pip*](https://pip.pypa.io/)
+- [*Pip*](https://pip.pypa.io/) (version=25.2 or higher)
 
 - [*Conda*](https://docs.conda.io/)
 
