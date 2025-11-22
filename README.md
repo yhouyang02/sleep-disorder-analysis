@@ -5,13 +5,13 @@
 - Harpreet Singh  
 - Songyang (Norton) Yu  
 
-This repository contains our data analysis project for DSCI 522 (Data Science Workflows)
+This repository contains our data analysis project for DSCI 522 (Data Science Workflows).
 
 ## About
 
-In this project we aim to develop a regression model that uses sleep-related, lifestyle, and physiological information to predict an individual’s self-reported stress level. Research shows that 30–40% of adults regularly sleep fewer than the recommended 7 hours, and more than one-third report high stress levels (CDC 2024; Sleep Foundation 2025). Our analysis examines how factors such as sleep duration, sleep quality, physical activity level, occupation, blood pressure category, BMI category, daily steps, and resting heart rate relate to perceived stress. We explore whether shorter or poorer-quality sleep, low activity levels, or elevated physiological indicators are associated with higher stress, and we build regression models to assess how well these features can predict stress levels.
+In this project we aim to develop a regression model that uses sleep-related, lifestyle, and physiological information to predict an individual’s self-reported stress level. Research shows that 30–40% of adults regularly sleep fewer than the recommended 7 hours, and more than one-third report high stress levels (CDC 2024; Sleep Foundation 2025). Our analysis explores whether shorter or poorer-quality sleeps are associated with higher stress, and we build regression models to assess how well these features can predict stress levels.
 
-The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](https://www.kaggle.com/datasets/varishabatool/disorder) (Varishabatool n.d.), sourced from Kaggle. Each row represents one individual's self-reported information, including sleep duration, sleep quality, physical activity frequency, occupation type, BMI category, blood pressure category, resting heart rate, daily steps, and numeric stress level. Because the dataset combines behavioral, demographic, and physiological variables, it provides an opportunity to explore how multiple aspects of daily life relate to stress. These structured features also make the dataset suitable for regression modeling aimed at understanding and predicting stress levels.
+The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](https://www.kaggle.com/datasets/varishabatool/disorder) (Varishabatool n.d.), sourced from Kaggle. Each row represents one individual's self-reported information, including sleep duration, sleep quality, physical activity frequency, occupation type, BMI category, blood pressure category, resting heart rate, daily steps, and numeric stress level. Because the dataset combines behavioral, demographic, and physiological variables, it provides an opportunity to further explore how multiple aspects of daily life relate to stress. These structured features also make the dataset suitable for regression modeling aimed at understanding and predicting stress levels.
 
 ## How to run the data analysis
 First time running the project, create the environment using `conda-lock` (preferred) or `conda`. Run one of the following commands from the root of this repository:
