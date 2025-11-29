@@ -12,8 +12,8 @@ The guide of set up a development environment is listed in the [README.md](https
 
 * We recommend that you create a Git branch for each pull request (PR).
 * New code should follow the [PEP 8](https://peps.python.org/pep-0008/) style guide.
-* Environment update should be made when new dependencies are added. Please use `conda-lock` to update the `environment.yml` and `environment.lock.yml` files.
+* Environment update should be made when new dependencies are added. Add new dependencies to `environment.yml` and use `conda-lock -f environment.yml` to update the multi-platform `conda-lock.yml` file.
 
-## Code of Conduct 
+## Code of Conduct
 
-Please note that this project is released with a Contributor [Code of Conduct](https://github.com/yhouyang02/DSCI_522_project-group01/blob/main/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms. 
+Please note that this project is released with a Contributor [Code of Conduct](https://github.com/yhouyang02/DSCI_522_project-group01/blob/main/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
