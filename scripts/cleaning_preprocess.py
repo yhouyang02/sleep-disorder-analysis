@@ -43,10 +43,9 @@ def cleaning_preprocess(file_path: str):
 
 if __name__ == "__main__":
     # Example usage
-    default_path = "data/raw.csv"
     #run the script with the default path
-    df=cleaning_preprocess(default_path)
-    df.to_csv("data/processed/clean_sleep_data.csv", index=False)
+    df=cleaning_preprocess(source)
+    df.to_csv(dest, index=False)
 
 
 
