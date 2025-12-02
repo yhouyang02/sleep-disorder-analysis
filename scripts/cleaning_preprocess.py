@@ -1,5 +1,10 @@
 import pandas as pd
 import path
+import click
+
+@click.comand()
+@click.option('--source',default='data/raw/sleep_raw.csv',help='The path to the raw data file')
+@click.option('--dest', default="data/processed/clean_sleep_data.csv", help='The path to save the cleaned data file')
 
 def cleaning_preprocess(file_path: str):
     """
@@ -11,7 +16,7 @@ def cleaning_preprocess(file_path: str):
     Returns:
         The normalized file path string with forward slashes.
     """
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(path(file_path))
     df_clean = df.copy()
     df_clean = df_clean[[
     "Person ID",
@@ -32,12 +37,16 @@ def cleaning_preprocess(file_path: str):
 
     df_clean = df_clean.rename(columns=name_conversion_dict)
 
-    df_clean.sample(7).reset_index(drop=True)
+    df_clean[["sleep_disorder"]] = df_clean[["sleep_disorder"]].fillna("No Disorder")
 
-    return 
+    return df_clean
 
 if __name__ == "__main__":
     # Example usage
     default_path = "data/raw.csv"
     #run the script with the default path
-    cleaning_preprocess(default_path)
+    df=cleaning_preprocess(default_path)
+    df.to_csv("data/processed/clean_sleep_data.csv", index=False)
+
+
+
