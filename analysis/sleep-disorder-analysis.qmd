@@ -1,22 +1,25 @@
 ---
-title: Understanding Stress Through Sleep Patterns
-jupyter:
-  kernelspec:
-    display_name: Python [conda env:dsci522]
-    language: python
-    name: conda-env-dsci522-py
+title: "Understanding Stress Through Sleep Patterns"
+author: "Yuheng Ouyang, Eduardo Rivera, Harpreet Singh, Songyang Yu"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+  pdf:
+    toc: true
+    toc-depth: 3
+editor: source
+execute:
+  echo: false
 ---
 
-by Yuheng Ouyang, Eduardo Rivera, Harpreet Singh, Songyang Yu 2025/12/7
-
-
-## 1. Summary
+# 1. Summary
 
 In this project, we explore how an individual’s sleep wellness relates to their reported stress level using the Sleep Health and Lifestyle Dataset. Our goal is to investigate whether sleep patterns can help explain or predict how stressed a person feels. To do this, we perform exploratory data analysis to understand trends in the data and examine whether shorter or irregular sleep is associated with higher stress. We then build a predictive model to evaluate how well sleep duration and related lifestyle variables can estimate a person’s stress level. This analysis aims to provide insight into the connection between sleep habits and stress, and to identify whether simple, easily measurable lifestyle information can meaningfully contribute to stress assessment.
 
 Our study corroborates these findings by showing that sleep duration and quality are inversely related to self-reported stress levels. With the $R^2$ score of 0.51, and the residual plot suggests of non-linear relations between sleep duration, quality and stress levels.
 
-## 2. Introduction
+# 2. Introduction
 
 Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis (Sleep Foundation, 2025). Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about 30 % of adults sleep fewer than the recommended 7 hours per night (Centers for Disease Control and Prevention [CDC], 2024). Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.
 
@@ -24,9 +27,9 @@ In this project, we ask whether information about a person’s sleep duration an
 
 To explore this question, we analyze the Sleep Health and Lifestyle Dataset (Varishabatool, n.d.), which contains information on individuals’ sleep duration, sleep quality, physical activity, demographic attributes, and self-reported stress. This dataset allows us to examine behavioral patterns related to sleep, identify lifestyle factors that correlate with stress, and evaluate whether a predictive model can estimate stress levels using accessible and non-clinical lifestyle data.
 
-## 3. Methods
+# 3. Methods
 
-### 3.1. Imports
+## 3.1. Imports
 
 ```{python}
 # Data wrangling libraries
@@ -61,7 +64,7 @@ from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCor
 from deepchecks.tabular import Dataset
 ```
 
-### 3.2. Data Loading and Preprocessing
+## 3.2. Data Loading and Preprocessing
 
 The Sleep Health and Lifestyle Dataset is publicly released on [Kaggle](https://www.kaggle.com/datasets/varishabatool/disorder) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license. We use one of its [GitHub mirror](https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv) (Husn, 2023) in our analysis to avoid Kaggle authentication.
 
@@ -119,7 +122,7 @@ We retain local copies of the original and preprocessed data.
 # df_clean.to_csv('data/processed/sleep_data_clean.csv')
 ```
 
-### 3.3. Data Spltting
+## 3.3. Data Spltting
 
 The data is splitinto train (80%) and test (20%) sets. The train set contains 299 records. 
 
@@ -134,9 +137,9 @@ train_df.drop(columns=['person_id']).describe(include="all")
 
 **Table 2:** Descriptive statistics of the training dataset
 
-## 4. Results
+# 4. Results
 
-### 4.1 Data Validation
+## 4.1 Data Validation
 
 Before we proceed with the data, we will perform a quality checks on the data ensuring the quality of the data is to the standard.
 
@@ -184,7 +187,7 @@ test_df.set_index('person_id', inplace=True)
 train_df.head()
 ```
 
-### 4.2 Exploratory Data Analysis (EDA)
+## 4.2 Exploratory Data Analysis (EDA)
 
 ```{python}
 # ==========================================================
@@ -335,19 +338,19 @@ plt.show()
 
 **Figure 1:** Exploratory data analysis of sleep features and stress levels
 
-#### (a) Sleep Duration vs Stress
+### (a) Sleep Duration vs Stress
 There's a strong negative correlation (r = -0.829, p = 7.188e-77), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.
 
-#### (b) Quality of Sleep vs Stress
+### (b) Quality of Sleep vs Stress
 An even stronger negative correlation exists (r = -0.904, p = 1.534e-111), suggesting that better sleep quality has a more pronounced relationship with reduced stress than sleep duration alone. The extremely low p-value confirms this is not due to chance.
 
-#### (c) Sleep Disorders and Stress Distribution
+### (c) Sleep Disorders and Stress Distribution
 The violin plots reveal that individuals with no sleep disorder cluster at higher stress levels (centered around 5-6), while those with sleep apnea and insomnia show broader distributions with generally elevated stress. Insomnia cases appear to have slightly higher median stress levels than sleep apnea.
 
-#### (d) Overall Stress Distribution
+### (d) Overall Stress Distribution
 The bimodal density plot suggests two distinct subpopulations in the dataset - one centered around stress level 4 and another around stress level 7-8. This could indicate fundamentally different groups, possibly corresponding to those with and without sleep-related issues.
 
-#### Overall Summary and Future Directions
+### Overall Summary and Future Directions
 The data strongly supports that both sleep quantity and quality are inversely related to stress, with sleep quality being the stronger predictor of stress levels. Given the clear linear trends observed in the data, implementing a Linear Regression model such as Ridge Regression would be an optimal approach to quantify how well these sleep-related features can explain variations in stress levels.
 
 ```{python}
@@ -379,7 +382,7 @@ if not check_feat_feat_corr_result.passed_conditions():
     raise ValueError("Feature–feature correlation exceeds the maximum acceptable threshold.")
 ```
 
-### 4.3 Baseline Model
+## 4.3 Baseline Model
 
 We separate the feature columns and the target column. 
 
@@ -409,7 +412,7 @@ dummy_df
 
 Our baseline model shows a validation accuracy of around 20%. We therefore aim for a test score higher than that. 
 
-### 4.4 Column Transformation
+## 4.4 Column Transformation
 
 We will perform standard scaling on `Sleep Duration` and one-hot encoding on `Sleep Disorder`. `Quality of Sleep` contains naturally ordered integers and therefore does not require transformation. 
 
@@ -424,7 +427,7 @@ preprocesser = make_column_transformer(
 preprocesser
 ```
 
-### 4.5. Training and Validation
+## 4.5. Training and Validation
 
 ```{python}
 ridge_pipe = make_pipeline(
@@ -450,7 +453,7 @@ cv_results_df
 
 The linear regression model demonstrated strong generalization with a mean cross-validated score of 0.69, closely matching the mean training score of 0.71. This indicates that the three selected features robustly explain approximately 70% of the variance in the target variable with minimal overfitting.
 
-### 4.6. Model Evaluation
+## 4.6. Model Evaluation
 
 The linear regression model explains approximately **52%** of the variance in stress levels ($R^2 \approx 0.52$). Given that stress levels range from 3 to 8 (range = 5), the RMSE between 1.2 to 1.3 represents approximately **25%** of this range, indicating moderate prediction accuracy.
 
@@ -529,34 +532,34 @@ plt.show()
 
 **Figure 2:** Ridge regression model performance evaluation on test data
 
-#### Interpretation of the Plots
+### Interpretation of the Plots
 The actual vs predicted plot shows moderate predictive performance with reasonable alignment along the diagonal line, though there's notable scatter indicating imperfect predictions, particularly for mid-range stress levels (4-6). The residual plot shows a slight negative trend, suggesting the model tends to overpredict at lower stress levels and underpredict at higher stress levels, indicating potential non-linear relationships in the data.
 
-## 5. Discussion
+# 5. Discussion
 
-### Summary of Findings
+## Summary of Findings
 
 The analysis revealed strong negative correlations between sleep duration, sleep quality, and stress levels, with sleep quality being the most significant predictor. The linear regression model explained approximately 52% of the variance in stress levels, indicating that these sleep-related features are meaningful but not exhaustive predictors of stress.
 
-### Expected vs Actual Outcomes
+## Expected vs Actual Outcomes
 
 The findings aligned with our expectations that better sleep patterns would correlate with lower stress levels. However, the model's moderate predictive accuracy suggests that while sleep is a crucial factor, other variables likely contribute significantly to stress. This highlights the complexity of stress as a multifaceted phenomenon influenced by various lifestyle, psychological, and environmental factors.
 
-### Assumptions and Limitations
+## Assumptions and Limitations
 
 To predict stress levels from our features, we employed Ridge regression, which implicitly assumes a linear relationship between the predictors and the target variable. This linearity assumption represents a key limitation, as real-world relationships between sleep parameters, lifestyle factors, and perceived stress are often non-linear (as suggested by some of our EDA scatter plots).
 Additionally, we did not incorporate polynomial or interaction terms, further restricting the model’s ability to capture more complex patterns.
 Another important limitation arises from the presence of outliers observed in the exploratory data analysis. Because mean squared error (MSE) is highly sensitive to outliers and is reported on a squared scale (making interpretation less intuitive), it may not have been the most robust evaluation metric. Similarly, $R^2$ assumes linearity and can be misleading when the true relationship is non-linear. 
 
-### Impact and Applications
+## Impact and Applications
 
 Understanding the relationship between sleep and stress has important implications for public health. Interventions aimed at improving sleep quality and duration could be effective strategies for stress reduction. There is however a lingering question of which direction the causality goes—does poor sleep lead to higher stress, or does high stress lead to poor sleep? Future studies could explore this bidirectional relationship further.
 
-### Future Work
+## Future Work
 
 Future research could establish the correct direction of causality between sleep and stress through longitudinal or experimental studies. Additionally, incorporating more comprehensive lifestyle, psychological, and physiological variables (e.g., actigraphy data, cortisol measurements, or validated anxiety/depression scales) could substantially enhance the predictive power of stress-assessment models. Exploring non-linear modeling techniques (e.g., random forests, gradient boosting, or neural networks) and polynomial/interaction terms would better capture the complex relationships evident in the data. Finally, adopting more robust and interpretable evaluation metrics—such as mean absolute error (MAE), Huber loss, or median absolute error—would reduce the influence of outliers and provide clearer insights into model performance.
 
-## 6. References
+# 6. References
 
 Centers for Disease Control and Prevention. (2024). *FastStats: Sleep in adults*. https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html
 
