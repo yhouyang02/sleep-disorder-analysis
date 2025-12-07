@@ -1,8 +1,15 @@
-FROM jupyter/minimal-notebook:x86_64-python-3.11.6
+FROM quay.io/jupyter/minimal-notebook:afe30f0c9ad8
 
-COPY . /home/jovyan/work
+COPY conda-linux-64.lock /tmp/conda-linux-64.lock
+
+USER $NB_UID
+
+RUN conda update --quiet --file /tmp/conda-linux-64.lock \
+    && conda clean --all -y -f \
+    && fix-permissions "${CONDA_DIR}" \
+    && fix-permissions "/home/${NB_USER}"
+
+RUN pip install --no-cache-dir deepchecks==0.18.1
+
+COPY --chown=${NB_UID}:${NB_GID} . /home/jovyan/work
 WORKDIR /home/jovyan/work
-
-RUN mamba env update -n base -f environment.yml
-
-CMD ["start-notebook.py", "--NotebookApp.notebook_dir=/home/jovyan/work/", "--NotebookApp.default_url=/lab/tree/analysis"]
