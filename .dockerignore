@@ -13,3 +13,4 @@ logs.md
 .history/
 .vscode/
 *.code-workspace
+*.Rhistory
