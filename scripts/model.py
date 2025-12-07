@@ -48,12 +48,12 @@ def save_df_as_png(df, filename, title=None):
 @click.command()
 @click.option(
     "--input-file",
-    default="../data/processed/sleep_data_clean.csv",
+    default="data/processed/sleep_data_clean.csv",
     help="Path to the cleaned data file",
 )
 @click.option(
     "--output-prefix",
-    default="../results/model_analysis",
+    default="results/model_analysis",
     help="Prefix for output files (e.g. results/this_analysis)",
 )
 def run_model(input_file, output_prefix):
