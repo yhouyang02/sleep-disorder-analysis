@@ -14,7 +14,7 @@ import os
     default="../data/processed/sleep_data_clean.csv",
     help="Path to the cleaned data file",
 )
-@click.option("--output-dir", default="results", help="Directory to save the figures")
+@click.option("--output-dir", default="../results", help="Directory to save the figures")
 def perform_eda(input_file, output_dir):
     """
     Performs Exploratory Data Analysis on the training split of the data
