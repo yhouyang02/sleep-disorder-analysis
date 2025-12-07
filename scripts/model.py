@@ -48,12 +48,12 @@ def save_df_as_png(df, filename, title=None):
 @click.command()
 @click.option(
     "--input-file",
-    default="data/processed/clean_sleep_data.csv",
+    default="../data/processed/sleep_data_clean.csv",
     help="Path to the cleaned data file",
 )
 @click.option(
     "--output-prefix",
-    default="results/model_analysis",
+    default="../results/model_analysis",
     help="Prefix for output files (e.g. results/this_analysis)",
 )
 def run_model(input_file, output_prefix):
@@ -134,7 +134,6 @@ def run_model(input_file, output_prefix):
     save_df_as_png(
         cv_results_df.round(4),
         f"{output_prefix}_cv_results.png",
-        "Cross-Validation Results (Ridge)",
     )
 
     # 4. Final Training & Evaluation
@@ -151,9 +150,7 @@ def run_model(input_file, output_prefix):
     print(f"Test R2: {r2:.4f}")
 
     # Save Test Results Table
-    save_df_as_png(
-        results_df.round(4), f"{output_prefix}_test_metrics.png", "Test Set Evaluation"
-    )
+    save_df_as_png(results_df.round(4), f"{output_prefix}_test_metrics.png")
 
     # 5. Visualization (Actual vs Predicted & Residuals)
     # Set plot style

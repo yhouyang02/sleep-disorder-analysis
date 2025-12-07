@@ -7,12 +7,12 @@ from sklearn.model_selection import train_test_split
 @click.command()
 @click.option(
     "--source",
-    default="data/raw/sleep_data_raw.csv",
+    default="/data/raw/sleep_data_raw.csv",
     help="The path to the raw data file",
 )
 @click.option(
     "--dest",
-    default="data/processed/sleep_data_clean.csv",
+    default="/data/processed/sleep_data_clean.csv",
     help="The path to save the cleaned data file",
 )
 def cleaning_preprocess(source, dest):
