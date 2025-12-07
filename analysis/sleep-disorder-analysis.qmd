@@ -9,6 +9,7 @@ format:
     toc: true
     toc-depth: 3
 editor: source
+bibliography: references.bib
 execute:
   echo: false
 ---
@@ -21,11 +22,11 @@ Our study corroborates these findings by showing that sleep duration and quality
 
 # 2. Introduction
 
-Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis (Sleep Foundation, 2025). Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about 30 % of adults sleep fewer than the recommended 7 hours per night (Centers for Disease Control and Prevention [CDC], 2024). Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.
+Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis [@sleep_foundation_2025]. Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about 30 % of adults sleep fewer than the recommended 7 hours per night [@cdc_sleep_2024]. Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.
 
 In this project, we ask whether information about a person’s sleep duration and daily lifestyle habits can help explain or predict their self-reported stress level. This question is important because stress assessments typically rely on subjective questionnaires or clinical evaluations, which can vary among individuals and are difficult to scale. If simple, easy-to-measure variables—such as how long someone sleeps or how active they are during the day—can provide meaningful insight into stress, this could support early identification of at-risk individuals and inform recommendations for healthier sleep and lifestyle patterns.
 
-To explore this question, we analyze the Sleep Health and Lifestyle Dataset (Varishabatool, n.d.), which contains information on individuals’ sleep duration, sleep quality, physical activity, demographic attributes, and self-reported stress. This dataset allows us to examine behavioral patterns related to sleep, identify lifestyle factors that correlate with stress, and evaluate whether a predictive model can estimate stress levels using accessible and non-clinical lifestyle data.
+To explore this question, we analyze the Sleep Health and Lifestyle Dataset [@varishabatool_nd], which contains information on individuals’ sleep duration, sleep quality, physical activity, demographic attributes, and self-reported stress. This dataset allows us to examine behavioral patterns related to sleep, identify lifestyle factors that correlate with stress, and evaluate whether a predictive model can estimate stress levels using accessible and non-clinical lifestyle data.
 
 # 3. Methods
 
@@ -66,25 +67,21 @@ from deepchecks.tabular import Dataset
 
 ## 3.2. Data Loading and Preprocessing
 
-The Sleep Health and Lifestyle Dataset is publicly released on [Kaggle](https://www.kaggle.com/datasets/varishabatool/disorder) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license. We use one of its [GitHub mirror](https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv) (Husn, 2023) in our analysis to avoid Kaggle authentication.
+The Sleep Health and Lifestyle Dataset is publicly released on [Kaggle](https://www.kaggle.com/datasets/varishabatool/disorder) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license. We use one of its [GitHub mirror](https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv) [@husn_2023] in our analysis to avoid Kaggle authentication.
 
 ```{python}
 url = "https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv"
 df = pd.read_csv(url)
 ```
 
-```{python}
-print(df.shape)
-df.head()
-```
+The dataset has 374 records and 12 features. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is `Sleep Duration`, a numerical/continuous variable representing hours of sleep per night. The second is `Quality of Sleep`, a numerical/ordinal measure of self-reported quality of sleep. The third is `Sleep Disorder`, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column `Stress Level` is the level of stress assessed through interviews or questionnaires. The values range from 3 (minimum) to 8 (maximum). Our model will predict the stress level as numeric scores through the input features.
 
-**Table 1:** First five rows of the Sleep Health & Lifestyle dataset
-
-The dataset has 374 records and 12 features [excluding the `Person ID`]. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is `Sleep Duration`, a numerical/continuous variable representing hours of sleep per night. The second is `Quality of Sleep`, a numerical/ordinal measure of self-reported quality of sleep. The third is `Sleep Disorder`, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column `Stress Level` is the level of stress assessed through interviews or questionnaires. The values range from 3 (minimum) to 8 (maximum). Our model will predict the stress level as numeric scores through the input features.
-
-To prepare the data for analysis, we first drop the unused columns. <span style='color:steelblue'>[NOTE: we are keeping the `Person ID` for now and will be dropped before the analysis]</span>
+To prepare the data for analysis, we first drop the unused columns. 
 
 ```{python}
+#| label: tbl-data-head-dropped
+#| tbl-cap: First rows of dataset with unused columns dropped
+
 df_clean = df.copy()
 df_clean = df_clean[[
     "Person ID",
@@ -111,15 +108,11 @@ df_clean.sample(7).reset_index(drop=True)
 The `NaN` values in the `Sleep Disorder` column means the individual has not been diagnosed with a sleep disorder. We replace the `NaN` values with a string value `No Disorder`.
 
 ```{python}
+#| label: tbl-data-head-no-nulls
+#| tbl-cap: First rows of dataset with null values replaced
+
 df_clean[["sleep_disorder"]] = df_clean[["sleep_disorder"]].fillna("No Disorder")
 df_clean.sample(7).reset_index(drop=True)
-```
-
-We retain local copies of the original and preprocessed data. 
-
-```{python}
-# df.to_csv('data/raw/sleep_data_raw.csv')
-# df_clean.to_csv('data/processed/sleep_data_clean.csv')
 ```
 
 ## 3.3. Data Spltting
@@ -127,21 +120,21 @@ We retain local copies of the original and preprocessed data.
 The data is splitinto train (80%) and test (20%) sets. The train set contains 299 records. 
 
 ```{python}
-train_df, test_df = train_test_split(df_clean, test_size=0.2, random_state=522)
-train_df.shape
-```
+#| label: tbl-descriptive-stat
+#| tbl-cap: Descriptive statistics of the dataset
 
-```{python}
+train_df, test_df = train_test_split(df_clean, test_size=0.2, random_state=522)
+
 train_df.drop(columns=['person_id']).describe(include="all")
 ```
 
-**Table 2:** Descriptive statistics of the training dataset
+@tbl-descriptive-stat shows the descriptive statistics of our processed dataset
 
 # 4. Results
 
 ## 4.1 Data Validation
 
-Before we proceed with the data, we will perform a quality checks on the data ensuring the quality of the data is to the standard.
+Before we proceed with the data, we perform a quality checks on the input data ensuring the quality of the data is to the standard.
 
 ```{python}
 sleep_schema = pa.DataFrameSchema(
@@ -159,24 +152,20 @@ sleep_schema = pa.DataFrameSchema(
 
 try:
     sleep_schema.validate(train_df, lazy=True)
-    print('Training data validation passed!')
 except pa.errors.SchemaErrors as exc:
-    print("Warning: Test data schema violations:")
     print(exc)
 ```
 
-Before running the model, we perform a quality check on the test data to ensure it meets the expected format and minimum quality thresholds. This validation uses a predefined schema and does not involve any data exploration or transformations that would violate the golden rule.
+We also perform a quality check on the test data to ensure it meets the expected format and minimum quality thresholds. This validation uses a predefined schema and does not involve any data exploration or transformations that would violate the golden rule.
 
 ```{python}
 try:
     sleep_schema.validate(test_df, lazy=True)
-    print("Test data validation passed!")
 except pa.errors.SchemaErrors as exc:
-    print("Warning: Test data schema violations:")
     print(exc)
 ```
 
-After the quality checks are done, we will now drop the `Person ID` colmn.
+After the quality checks are done, we will now drop the `Person ID` column. The final input data looks like @tbl-reindexed.
 
 ```{python}
 train_df.set_index('person_id', inplace=True)
@@ -184,159 +173,15 @@ test_df.set_index('person_id', inplace=True)
 ```
 
 ```{python}
+#| label: tbl-reindexed
+#| tbl-cap: Input training data schema
+
 train_df.head()
 ```
 
 ## 4.2 Exploratory Data Analysis (EDA)
 
-```{python}
-# ==========================================================
-#               creating custom color pallet
-# ==========================================================
-seshadri = ['#c3121e', '#0348a1', '#ffb01c', '#027608',
-            '#0193b0', '#9c5300', '#949c01', '#7104b5']
-#            0sangre,   1neptune,  2pumpkin,  3clover,   
-#            4denim,    5cocoa,    6cumin,    7berry
-
-
-# setting up the plot grid
-fig = plt.figure(figsize=(15, 12), dpi=100)
-gs = gridspec.GridSpec(2, 2, figure=fig)
-gs.update(wspace=0.21, hspace=0.21)
-
-# ==========================================================
-# PLOT 1
-ax = fig.add_subplot(gs[0])
-lr = linregress(y=train_df['sleep_duration'], x=train_df['stress_level'])
-sns.regplot(
-    data=train_df,
-    x='sleep_duration',
-    y='stress_level',
-    ci=False,
-    line_kws=dict(color=seshadri[0], alpha=0.4),
-    scatter_kws=dict(color=seshadri[1])
-)
-
-# print r and p value
-ax.text(
-    0.71, 0.855,
-    f'r : {lr.rvalue:.3f} \np : {lr.pvalue:.3e}',
-    fontsize=14,
-    transform=ax.transAxes,
-    bbox=dict(facecolor='white', edgecolor='black')
-)
-
-# print figure label
-ax.text(
-    0.01, 1.02,
-    '(a)',
-    color='red',
-    fontsize=20,
-    fontweight='bold',
-    transform=ax.transAxes
-)
-
-ax.set_xlabel('Sleep Duration')
-ax.set_ylabel('Stress Level')
-
-# ==========================================================
-# PLOT 2
-ax = fig.add_subplot(gs[1])
-lr = linregress(y=train_df['sleep_quality'], x=train_df['stress_level'])
-sns.regplot(
-    data=train_df,
-    x='sleep_quality',
-    y='stress_level',
-    ci=False,
-    line_kws=dict(color=seshadri[0], alpha=0.4),
-    scatter_kws=dict(color=seshadri[1])
-)
-
-# print r and p value
-ax.text(
-    0.68, 0.855,
-    f'r : {lr.rvalue:.3f} \np : {lr.pvalue:.3e}',
-    fontsize=14,
-    transform=ax.transAxes,
-    bbox=dict(facecolor='white', edgecolor='black')
-)
-
-# print figure label
-ax.text(
-    0.01, 1.02,
-    '(b)',
-    color='red',
-    fontsize=20,
-    fontweight='bold',
-    transform=ax.transAxes
-)
-
-ax.set_xlabel('Sleep Quality')
-ax.set_ylabel('Stress Level')
-
-# ==========================================================
-# PLOT 3
-ax = fig.add_subplot(gs[2])
-
-sns.violinplot(
-    data=train_df,
-    y='sleep_disorder',
-    x='stress_level',
-    hue='sleep_disorder',
-    palette=seshadri,
-    alpha=0.7,
-    ax=ax
-)
-
-# print figure label
-ax.text(
-    0.01, 1.02,
-    '(c)',
-    color='red',
-    fontsize=20,
-    fontweight='bold',
-    transform=ax.transAxes
-)
-
-ax.set_ylabel('Sleep Disorder')
-ax.set_xlabel('Stress Level')
-
-# ==========================================================
-# PLOT 4
-ax = fig.add_subplot(gs[3])
-
-kde = gaussian_kde(train_df['stress_level'])
-x_range = np.linspace(train_df['stress_level'].min(),
-                      train_df['stress_level'].max(), 200)
-y_kde = kde(x_range)
-
-ax.plot(
-    x_range,
-    y_kde,
-    color=seshadri[0],
-    linewidth=2.5,
-    alpha=0.8
-)
-ax.fill_between(x_range, y_kde, alpha=0.3, color=seshadri[0])
-ax.set_xlabel('Stress Level')
-ax.set_ylabel('Density')
-ax.set_yticks(np.arange(0, 0.21, 0.05))
-ax.set_ylim(0, 0.20)
-
-# print figure label
-ax.text(
-    0.01, 1.02,
-    '(d)',
-    color='red',
-    fontsize=20,
-    fontweight='bold',
-    transform=ax.transAxes
-)
-
-plt.show()
-```
-
-**Figure 1:** Exploratory data analysis of sleep features and stress levels
+![Exploratory data analysis of sleep features and stress levels](../results/eda_summary.png){#fig-eda-summary width="60%"}
 
 ### (a) Sleep Duration vs Stress
 There's a strong negative correlation (r = -0.829, p = 7.188e-77), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.
@@ -396,6 +241,9 @@ y_test = test_df["stress_level"]
 We train a `DummyClassifier` as our baseline model. 
 
 ```{python}
+#| label: tbl-dummy-results
+#| tbl-cap: Baseline model performance 
+
 dummy = DummyClassifier()
 
 dummy_scores = cross_validate(
@@ -410,7 +258,7 @@ dummy_df = pd.DataFrame(dummy_scores)
 dummy_df
 ```
 
-Our baseline model shows a validation accuracy of around 20%. We therefore aim for a test score higher than that. 
+@tbl-dummy-results shows a validation accuracy of around 20%. We therefore aim for a test score higher than that. 
 
 ## 4.4 Column Transformation
 
@@ -423,13 +271,14 @@ preprocesser = make_column_transformer(
     (StandardScaler(), ["sleep_duration"]),
     (OneHotEncoder(), ["sleep_disorder"]),
 )
-
-preprocesser
 ```
 
 ## 4.5. Training and Validation
 
 ```{python}
+#| label: tbl-cv-results
+#| tbl-cap: Cross-validation results
+
 ridge_pipe = make_pipeline(
     preprocesser,
     Ridge(alpha=1.0)
@@ -463,77 +312,13 @@ y_pred = ridge_pipe.predict(X_test)
 
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
-
-print(f"MSE: {mse:.4f}")
-print(f"R^2: {r2:.4f}")
 ```
 
 Finally, we visualize the prediction results.
 
-```{python}
-# Calculate residuals
-residuals = y_test - y_pred
+![Ridge regression model performance evaluation on test data](../results/model_analysis_prediction_plots.png){#fig-ridge-model}
 
-# Create figure with GridSpec
-fig = plt.figure(figsize=(14, 6))
-gs = gridspec.GridSpec(1, 2, figure=fig, wspace=0.2)
-
-# ==========================================================
-# PLOT 1: Actual vs Predicted
-# prediction line
-min_val = min(y_test.min(), y_pred.min())
-max_val = max(y_test.max(), y_pred.max())
-
-ax = fig.add_subplot(gs[0])
-ax.scatter(
-    y_test,
-    y_pred,
-    alpha=0.6,
-    edgecolors='k',
-    linewidth=0.5
-)
-ax.plot(
-    [min_val, max_val],
-    [min_val, max_val],
-    'r--',
-    lw=2,
-    label='Perfect Prediction'
-)
-
-ax.set_xlabel('Actual Stress Level', fontsize=12)
-ax.set_ylabel('Predicted Stress Level', fontsize=12)
-ax.set_title(
-    'Actual vs Predicted Stress Levels',
-    fontsize=14, fontweight='bold', loc='left'
-)
-ax.legend()
-ax.grid(True, alpha=0.3)
-
-# ==========================================================
-# PLOT 2: Residuals
-ax = fig.add_subplot(gs[1])
-ax.scatter(
-    y_pred,
-    residuals,
-    alpha=0.6,
-    edgecolors='k',
-    linewidth=0.5
-)
-ax.axhline(y=0, color='r', linestyle='--', lw=2)
-
-ax.set_xlabel('Predicted Stress Level', fontsize=12)
-ax.set_ylabel('Residuals (Actual - Predicted)', fontsize=12)
-ax.set_title('Residual Plot', fontsize=14, fontweight='bold', loc='left')
-ax.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-```
-
-**Figure 2:** Ridge regression model performance evaluation on test data
-
-### Interpretation of the Plots
-The actual vs predicted plot shows moderate predictive performance with reasonable alignment along the diagonal line, though there's notable scatter indicating imperfect predictions, particularly for mid-range stress levels (4-6). The residual plot shows a slight negative trend, suggesting the model tends to overpredict at lower stress levels and underpredict at higher stress levels, indicating potential non-linear relationships in the data.
+@fig-ridge-model shows moderate predictive performance with reasonable alignment along the diagonal line, though there's notable scatter indicating imperfect predictions, particularly for mid-range stress levels (4-6). The residual plot shows a slight negative trend, suggesting the model tends to overpredict at lower stress levels and underpredict at higher stress levels, indicating potential non-linear relationships in the data.
 
 # 5. Discussion
 
@@ -560,12 +345,4 @@ Understanding the relationship between sleep and stress has important implicatio
 Future research could establish the correct direction of causality between sleep and stress through longitudinal or experimental studies. Additionally, incorporating more comprehensive lifestyle, psychological, and physiological variables (e.g., actigraphy data, cortisol measurements, or validated anxiety/depression scales) could substantially enhance the predictive power of stress-assessment models. Exploring non-linear modeling techniques (e.g., random forests, gradient boosting, or neural networks) and polynomial/interaction terms would better capture the complex relationships evident in the data. Finally, adopting more robust and interpretable evaluation metrics—such as mean absolute error (MAE), Huber loss, or median absolute error—would reduce the influence of outliers and provide clearer insights into model performance.
 
 # 6. References
-
-Centers for Disease Control and Prevention. (2024). *FastStats: Sleep in adults*. https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html
-
-Husn, M. (2023). *Sleep health and lifestyle* [Data set]. GitHub. https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv
-
-Sleep Foundation. (2025). 100+ sleep statistics – Facts and data about sleep 2024. https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics
-
-Varishabatool. (n.d.). *Sleep health and lifestyle dataset* [Data set]. Kaggle. https://www.kaggle.com/datasets/varishabatool/disorder
 
