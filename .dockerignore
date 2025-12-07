@@ -1,16 +1,7 @@
-# Deliverables
-deliverables/
-
-# Personal logs
-logs.md
-00-update_enviroment_yml.py
-
-# macOS system files
-.DS_Store
-
-
-**/.ipynb_checkpoints/
-.history/
-.vscode/
-*.code-workspace
-*.Rhistory
+*
+!conda-linux-64.lock
+!scripts/
+!data/
+!results/
+!docs/
+!analysis/
