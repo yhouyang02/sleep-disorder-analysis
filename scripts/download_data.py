@@ -19,7 +19,7 @@ import pandas as pd
     "--output-path",
     type=str,
     required=True,
-    help="Where to save the downloaded data, e.g. data/raw/sleep_raw.csv",
+    help="Where to save the downloaded data, e.g. data/raw/sleep_data_raw.csv",
 )
 def main(input_path, output_path):
     """Download or copy a raw CSV file and save it locally."""
