@@ -12,7 +12,26 @@ The guide of set up a development environment is listed in the [README.md](https
 
 * We recommend that you create a Git branch for each pull request (PR).
 * New code should follow the [PEP 8](https://peps.python.org/pep-0008/) style guide.
-* Environment update should be made when new dependencies are added. Add new dependencies to `environment.yml` and use `conda-lock -f environment.yml` to update the multi-platform `conda-lock.yml` file.
+* Environment update should be made when new dependencies are added. See [Adding a new dependency](#dep) section below.
+
+## <a name="dep"></a> Adding a new dependency
+
+The section is adjusted from <https://github.com/UBC-MDS/dsci-522-individual-assignment-quarto-python/blob/main/README.md>.
+
+1. Add the dependency to the `environment.yml` file on a new branch.
+
+2. Run `conda-lock -f environment.yml` to update the multi-platform `conda-lock.yml` file.
+
+3. Re-build the Docker image locally to ensure it builds and runs properly.
+
+4. Push the changes to GitHub. A new Docker
+   image will be built and pushed to Docker Hub automatically.
+   It will be tagged with the SHA for the commit that changed the file.
+
+5. Update the `docker-compose.yml` file on your branch to use the new
+   container image (make sure to update the tag specifically).
+
+6. Send a pull request to merge the changes into the `main` branch.
 
 ## Code of Conduct
 

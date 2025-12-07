@@ -34,12 +34,26 @@ docker run --rm -it -p 8888:8888 yhouyang02/dsci522-project-group01:latest
 Look in the terminal for a URL like:
 
 ```html
-http://127.0.0.1:8888/?token=<some_long_token>
+http://127.0.0.1:8888/lab?token=<some_long_token>
 ```
 
-Open the URL in your web browser.
+Open the URL in your web browser to launch Jupyter Lab.
 
-Then open the notebook `analysis\sleep-disorder-analysis.ipynb` with the default Python kernel.
+Open a new Terminal in Jupyter Lab and run the following command to execute the analysis scripts. The scripts will download and preprocess the data, perform exploratory data analysis, and build the regression model.
+
+```bash
+python scripts/download_data.py
+python scripts/clean_data.py
+python scripts/eda.py 
+python scripts/model.py
+```
+
+After the scripts finish running, run the following commands to generate the report in PDF and HTML format.
+
+```bash
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
+```
 
 ### In a local Conda environment
 
@@ -61,21 +75,39 @@ Then activate the environment:
 conda activate dsci522
 ```
 
-To launch the analysis, run:
+Run the following command to execute the analysis scripts. The scripts will download and preprocess the data, perform exploratory data analysis, and build the regression model.
 
 ```bash
-jupyter lab
+python scripts/download_data.py
+python scripts/clean_data.py
+python scripts/eda.py 
+python scripts/model.py
 ```
 
-Open `analysis\sleep-disorder-analysis.ipynb` in Jupyter Lab, go to Kernel, then Select Kernel, and choose Python `[conda env:dsci522]`.
+Run the following commands to generate the report in PDF and HTML format.
+
+```bash
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
+```
+
+### Interactively with Jupyter Notebook
+
+If you follow either the Docker or Conda environment setup methods above, you will be able to read the results of our analysis in a report format without code snippets.
+
+You can also run the analysis interactively in a Jupyter Notebook. After setting up the Conda environment as described above, launch Jupyter Lab and navigate to `analysis/sleep-disorder-analysis.ipynb`. Select an appropriate kernel (e.g., `dsci522` when run locally or `base` when run in a Docker container) and run the notebook cells to see the code and results.
 
 ## Dependencies
 
 To run this project, the following tools and Python packages are required:
 
+- [*Docker*](https://www.docker.com/) (version 29.0.1 or higher, if using Docker)
+
 - [*Conda*](https://docs.conda.io/) (version 25.9.1 or higher)
 
 - [*Conda-lock*](https://conda.github.io/conda-lock/) (version 3.0.4 or higher)
+
+- [*Pip*](https://pip.pypa.io/) (version=25.2 or higher)
 
 - [*Python*](https://www.python.org/) (version 3.12.11 or higher)
 
@@ -95,7 +127,13 @@ To run this project, the following tools and Python packages are required:
 
 - [*SciencePlots*](https://github.com/garrettj403/SciencePlots) (version=2.2.0 or higher)
 
-- [*Pip*](https://pip.pypa.io/) (version=25.2 or higher)
+- [*Pandera*](https://pandera.readthedocs.io/) (version=0.20.4 or higher)
+
+- [*Deepchecks*](https://docs.deepchecks.com/) (version 0.18.1 or higher)
+
+- [*Click*](https://click.palletsprojects.com/) (version=8.2.1 or higher)
+
+- [*Quarto*](https://quarto.org/) (version=1.3.313 or higher)
 
 ## License
 

@@ -13,13 +13,15 @@ import pandas as pd
     "--input-path",
     type=str,
     required=True,
+    default="https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv",
     help="URL or local path to the raw CSV data.",
 )
 @click.option(
     "--output-path",
     type=str,
     required=True,
-    help="Where to save the downloaded data, e.g. data/raw/sleep_raw.csv",
+    default="data/raw/sleep_data_raw.csv",
+    help="Where to save the downloaded data, e.g. data/raw/sleep_data_raw.csv",
 )
 def main(input_path, output_path):
     """Download or copy a raw CSV file and save it locally."""
