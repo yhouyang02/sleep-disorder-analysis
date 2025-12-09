@@ -1,11 +1,11 @@
 # Understanding Stress Through Sleep Patterns
 
-- Yuheng Ouyang  
-- Eduardo Rivera  
-- Harpreet Singh  
-- Songyang (Norton) Yu  
+- Yuheng Ouyang (@yhouyang02)
+- Eduardo Rivera (@e-riveras)
+- Harpreet Singh (@h4rrye)
+- Songyang (Norton) Yu (@Spanorti08)
 
-This repository contains our data analysis project for DSCI 522 (Data Science Workflows).
+This repository contains our data analysis project for DSCI 522: Data Science Workflows.
 
 ## About
 
