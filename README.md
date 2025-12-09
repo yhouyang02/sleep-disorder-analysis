@@ -9,9 +9,9 @@ This repository contains our data analysis project for DSCI 522 (Data Science Wo
 
 ## About
 
-In this project we aim to develop a regression model that uses sleep-related, lifestyle, and physiological information to predict an individual’s self-reported stress level. Research shows that 30–40% of adults regularly sleep fewer than the recommended 7 hours, and more than one-third report high stress levels (CDC 2024; Sleep Foundation 2025). Our analysis explores whether shorter or poorer-quality sleeps are associated with higher stress, and we build regression models to assess how well these features can predict stress levels.
+In this project we aim to develop a regression model that uses sleep-related, lifestyle, and physiological information to predict an individual’s self-reported stress level. Research shows that 30–40% of adults regularly sleep fewer than the recommended 7 hours, and more than one-third report high stress levels (CDC 2024[^cdc2024]; Sleep Foundation 2025[^sleep2025]). Our analysis explores whether shorter or poorer-quality sleeps are associated with higher stress, and we build regression models to assess how well these features can predict stress levels.
 
-The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](https://www.kaggle.com/datasets/varishabatool/disorder) (Varishabatool n.d.), sourced from Kaggle. Each row represents one individual's self-reported information, including sleep duration, sleep quality, physical activity frequency, occupation type, BMI category, blood pressure category, resting heart rate, daily steps, and numeric stress level. Because the dataset combines behavioral, demographic, and physiological variables, it provides an opportunity to further explore how multiple aspects of daily life relate to stress. These structured features also make the dataset suitable for regression modeling aimed at understanding and predicting stress levels.
+The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](https://www.kaggle.com/datasets/varishabatool/disorder) (Varishabatool n.d.[^varisha]), sourced from Kaggle. We use a public image (Husn 2023[^husn2023]) to streamline the preprocessing. Each row represents one individual's self-reported information, including sleep duration, sleep quality, physical activity frequency, occupation type, BMI category, blood pressure category, resting heart rate, daily steps, and numeric stress level. Because the dataset combines behavioral, demographic, and physiological variables, it provides an opportunity to further explore how multiple aspects of daily life relate to stress. These structured features also make the dataset suitable for regression modeling aimed at understanding and predicting stress levels.
 
 ## How to run the data analysis
 
@@ -144,10 +144,10 @@ For full legal details, please see the [LICENSE](./LICENSE.txt) file.
 
 ## References
 
-Centers for Disease Control and Prevention. (2024). *FastStats: Sleep in adults*. <https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html>
+[^cdc2024]: Centers for Disease Control and Prevention. (2024). *FastStats: Sleep in adults*. [https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html](https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html)
 
-Husn, M. (2023). *Sleep health and lifestyle* [Data set]. GitHub. <https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv>
+[^husn2023]: Husn, M. (2023). *Sleep health and lifestyle* [Data set]. GitHub. [https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv](https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv)
 
-Sleep Foundation. (2025). 100+ sleep statistics – Facts and data about sleep 2024. <https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics>
+[^sleep2025]: Sleep Foundation. (2025). *100+ sleep statistics – Facts and data about sleep 2024*. [https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics](https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics)
 
-Varishabatool. (n.d.). *Sleep health and lifestyle dataset* [Data set]. Kaggle. <https://www.kaggle.com/datasets/varishabatool/disorder>
+[^varisha]: Varishabatool. (n.d.). *Sleep health and lifestyle dataset* [Data set]. Kaggle. [https://www.kaggle.com/datasets/varishabatool/disorder](https://www.kaggle.com/datasets/varishabatool/disorder)
