@@ -2,6 +2,12 @@ FROM quay.io/jupyter/minimal-notebook:afe30f0c9ad8
 
 COPY conda-linux-64.lock /tmp/conda-linux-64.lock
 
+USER root
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    texlive-luatex \
+    && rm -rf /var/lib/apt/lists/*
+
 USER $NB_UID
 
 RUN conda update --quiet --file /tmp/conda-linux-64.lock \
