@@ -19,7 +19,7 @@ The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](h
 
 Make sure you have [Docker](https://www.docker.com/get-started/) installed and running.
 
-Pull the container image and run the container:
+Clone the project repo and create the container by running the following command:
 
 ```bash
 docker-compose up
@@ -70,6 +70,12 @@ After the scripts finish running, run the following commands to generate the rep
 quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir ../docs
 quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir ../docs
 ``` -->
+
+Shut down and remove the container when you are done:
+
+```bash
+docker-compose down
+```
 
 ### In a local Conda environment
 
