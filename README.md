@@ -43,7 +43,7 @@ http://127.0.0.1:8888/lab?token=<some_long_token>
 
 Open the URL in your web browser to launch Jupyter Lab.
 
-We provide a Makefile to automate the entire analysis pipeline. From the root of this repository, run:
+We provide a Makefile to automate the entire analysis pipeline. Open a new Terminal in Jupyter Lab and run the following commands:
 
 ```bash
 # Clean the directory before the analysis (recommended for first time)
