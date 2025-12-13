@@ -19,9 +19,13 @@ The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](h
 
 Make sure you have [Docker](https://www.docker.com/get-started/) installed and running.
 
-Pull the docker image from Docker Hub:
+Pull the container image and run the container:
 
 ```bash
+docker-compose up
+```
+
+<!-- ```bash
 docker pull yhouyang02/dsci522-project-group01:latest
 ```
 
@@ -29,7 +33,7 @@ Run the docker container:
 
 ```bash
 docker run --rm -it -p 8888:8888 yhouyang02/dsci522-project-group01:latest
-```
+``` -->
 
 Look in the terminal for a URL like:
 
@@ -39,7 +43,19 @@ http://127.0.0.1:8888/lab?token=<some_long_token>
 
 Open the URL in your web browser to launch Jupyter Lab.
 
-Open a new Terminal in Jupyter Lab and run the following command to execute the analysis scripts. The scripts will download and preprocess the data, perform exploratory data analysis, and build the regression model.
+We provide a Makefile to automate the entire analysis pipeline. Open a new Terminal in Jupyter Lab and run the following commands:
+
+```bash
+# Clean the directory before the analysis (recommended for first time)
+make clean
+
+# Run the complete analysis
+make all
+```
+
+You can also run `make help` to view steps of the pipeline and all available Makefile targets. The Makefile automatically manages dependencies and only re-runs steps when input files change, making it efficient for iterative development.
+
+<!-- Open a new Terminal in Jupyter Lab and run the following command to execute the analysis scripts. The scripts will download and preprocess the data, perform exploratory data analysis, and build the regression model.
 
 ```bash
 python scripts/download_data.py
@@ -51,15 +67,9 @@ python scripts/model.py
 After the scripts finish running, run the following commands to generate the report in PDF and HTML format.
 
 ```bash
-quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
-quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
-```
-
-You can also run the full analysis using docker-compose, which combines build and execution into a single command. From the root of this repository, run:
-
-```bash
-docker-compose up --build
-```
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir ../docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir ../docs
+``` -->
 
 ### In a local Conda environment
 
@@ -93,35 +103,17 @@ python scripts/model.py
 Run the following commands to generate the report in PDF and HTML format.
 
 ```bash
-quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
-quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir ../docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir ../docs
 ```
+
+*Note: If you have GNU Make installed, you can also use the provided Makefile to automate the entire analysis pipeline as described in the Docker section above.*
 
 ### Interactively with Jupyter Notebook
 
 If you follow either the Docker or Conda environment setup methods above, you will be able to read the results of our analysis in a report format without code snippets.
 
 You can also run the analysis interactively in a Jupyter Notebook. After setting up the Conda environment as described above, launch Jupyter Lab and navigate to `analysis/sleep-disorder-analysis.ipynb`. Select an appropriate kernel (e.g., `dsci522` when run locally or `base` when run in a Docker container) and run the notebook cells to see the code and results.
-
-### Using Make (Alternative Method)
-
-We provide a `Makefile` to automate the entire analysis pipeline. From the root of this repository, run:
-```bash
-# 1. Clean the directory before the analysis (recommended)
-make clean
-
-# 2. Run the complete analysis
-make all
-
-```
-
-This will execute all steps: data download, cleaning, EDA, modeling, and report generation.
-
-Other useful commands:
-- `make docs/sleep-disorder-analysis.html` - Generate HTML report only
-- `make docs/sleep-disorder-analysis.pdf` - Generate PDF report only
-
-The Makefile automatically manages dependencies and only re-runs steps when input files change, making it efficient for iterative development.
 
 ## Dependencies
 

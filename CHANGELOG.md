@@ -6,7 +6,7 @@
 
 - Resolved issues with rendering HTML and PDF reports with correct execution but no oupout.
 - This change improves usability and ensures consistent report generation.
-- Implemented in ...
+- Implemented in [#65](https://github.com/yhouyang02/sleep-disorder-analysis/pull/65).
 
 ## 2025-12-13 - Milestone 2 Feedback Fixes (by Yuheng Ouyang)
 
@@ -14,7 +14,7 @@
 
 - Used a `docker-compose.yml` file to simplify Docker container management.
 - This change improves usability and streamlines the process of running the project in a containerized environment.
-- Implemented in ...
+- Implemented in [#65](https://github.com/yhouyang02/sleep-disorder-analysis/pull/65).
 
 ## 2025-12-13 - Milestone 1 Feedback Fixes (by Yuheng Ouyang)
 
