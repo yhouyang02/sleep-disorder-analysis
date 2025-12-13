@@ -1,7 +1,11 @@
 import pandas as pd
 import click
 import os
-from sklearn.model_selection import train_test_split
+import sys
+
+# Add the project root to sys.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from src.clean_utils import clean_sleep_data
 
 
 @click.command()
@@ -26,47 +30,11 @@ def cleaning_preprocess(source, dest):
         print(f"Error: The file '{source}' was not found.")
         return
 
-    df_clean = df.copy()
-
-    # Columns to keep
-    target_columns = [
-        "Person ID",
-        "Sleep Duration",
-        "Quality of Sleep",
-        "Sleep Disorder",
-        "Stress Level",
-    ]
-
-    # Check if all target columns exist
-    if not set(target_columns).issubset(df.columns):
-        missing = set(target_columns) - set(df.columns)
-        print(
-            f"Error: The following required columns are missing from the source file: {missing}"
-        )
+    try:
+        df_clean = clean_sleep_data(df)
+    except ValueError as e:
+        print(f"Error: {e}")
         return
-
-    df_clean = df_clean[target_columns]
-
-    # renaming columns using the camel_syntax
-    name_conversion_dict = {
-        "Person ID": "person_id",
-        "Sleep Duration": "sleep_duration",
-        "Quality of Sleep": "sleep_quality",
-        "Sleep Disorder": "sleep_disorder",
-        "Stress Level": "stress_level",
-    }
-
-    df_clean = df_clean.rename(columns=name_conversion_dict)
-
-    df_clean["sleep_disorder"] = df_clean["sleep_disorder"].fillna("No Disorder")
-
-    # Perform train-test split to identify training indices
-    # The split parameters match the notebook: test_size=0.2, random_state=522
-    train_df, _ = train_test_split(df_clean, test_size=0.2, random_state=522)
-
-    # Create 'train' column: 1 for train, 0 for test
-    df_clean["train"] = 0
-    df_clean.loc[train_df.index, "train"] = 1
 
     # Ensure destination directory exists
     os.makedirs(os.path.dirname(dest), exist_ok=True)
