@@ -3,6 +3,8 @@
 # date: 2025-12-02
 
 import os
+import ssl
+import urllib.request
 from urllib.parse import urlparse
 import click
 import pandas as pd
@@ -37,7 +39,23 @@ def main(input_path, output_path):
 
     if is_url:
         # Download CSV from URL
-        df = pd.read_csv(input_path)
+        # Handle SSL certificate verification
+        try:
+            # Try with default SSL context first
+            df = pd.read_csv(input_path)
+        except Exception as e:
+            if "CERTIFICATE_VERIFY_FAILED" in str(e) or "SSL" in str(e):
+                # If SSL fails, try with unverified context (less secure but works)
+                # Note: This is a workaround for macOS SSL certificate issues
+                # Create an unverified SSL context
+                ssl_context = ssl.create_default_context()
+                ssl_context.check_hostname = False
+                ssl_context.verify_mode = ssl.CERT_NONE
+                # Use urllib with the SSL context to download
+                with urllib.request.urlopen(input_path, context=ssl_context) as response:
+                    df = pd.read_csv(response)
+            else:
+                raise
         df.to_csv(output_path, index=False)
     else:
         # Copy local CSV

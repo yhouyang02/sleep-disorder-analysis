@@ -14,3 +14,5 @@ logs.md
 .vscode/
 *.code-workspace
 *.Rhistory
+/.quarto/
+**/*.quarto_ipynb
