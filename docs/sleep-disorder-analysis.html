@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-12-13">
+
+<title>Understanding Stress Through Sleep Patterns</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="sleep-disorder-analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="sleep-disorder-analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="sleep-disorder-analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sleep-disorder-analysis_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sleep-disorder-analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sleep-disorder-analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sleep-disorder-analysis_files/libs/bootstrap/bootstrap-7416f59753bf0ba0a3e8430fe336e89f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">1. Summary</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">2. Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">3. Methods</a>
+  <ul class="collapse">
+  <li><a href="#data-loading-and-preprocessing" id="toc-data-loading-and-preprocessing" class="nav-link" data-scroll-target="#data-loading-and-preprocessing">3.1. Data Loading and Preprocessing</a></li>
+  <li><a href="#data-spltting" id="toc-data-spltting" class="nav-link" data-scroll-target="#data-spltting">3.2. Data Spltting</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">4. Results</a>
+  <ul class="collapse">
+  <li><a href="#data-validation" id="toc-data-validation" class="nav-link" data-scroll-target="#data-validation">4.1. Data Validation</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">4.2. Exploratory Data Analysis (EDA)</a></li>
+  <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model">4.3. Baseline Model</a></li>
+  <li><a href="#column-transformation" id="toc-column-transformation" class="nav-link" data-scroll-target="#column-transformation">4.4. Column Transformation</a></li>
+  <li><a href="#training-and-validation" id="toc-training-and-validation" class="nav-link" data-scroll-target="#training-and-validation">4.5. Training and Validation</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">4.6. Model Evaluation</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">5. Discussion</a>
+  <ul class="collapse">
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">5.1. Summary of Findings</a></li>
+  <li><a href="#expected-vs-actual-outcomes" id="toc-expected-vs-actual-outcomes" class="nav-link" data-scroll-target="#expected-vs-actual-outcomes">5.2. Expected vs Actual Outcomes</a></li>
+  <li><a href="#assumptions-and-limitations" id="toc-assumptions-and-limitations" class="nav-link" data-scroll-target="#assumptions-and-limitations">5.3. Assumptions and Limitations</a></li>
+  <li><a href="#impact-and-applications" id="toc-impact-and-applications" class="nav-link" data-scroll-target="#impact-and-applications">5.4. Impact and Applications</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">5.5. Future Work</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">6. References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sleep-disorder-analysis.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Understanding Stress Through Sleep Patterns</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuheng Ouyang </p>
+             <p>Eduardo Rivera </p>
+             <p>Harpreet Singh </p>
+             <p>Songyang Yu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 13, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="summary" class="level1">
+<h1>1. Summary</h1>
+<p>Stress has become a critical public health concern, yet its relationship with daily habits remains complex to quantify. In this project, we explore how an individual’s sleep wellness relates to their reported stress level using the Sleep Health and Lifestyle Dataset. Our goal is to investigate whether sleep patterns can help explain or predict how stressed a person feels. To do this, we perform exploratory data analysis to understand trends in the data and build a predictive model to evaluate how well sleep duration and related lifestyle variables can estimate a person’s stress level. Our analysis reveals a significant inverse relationship between sleep metrics and stress. Specifically, our model achieved an <span class="math inline">\(R^2\)</span> score of <span class="math inline">\(0.51\)</span>, corroborating that shorter sleep duration and lower quality are associated with higher self-reported stress. However, residual analysis suggests non-linear relationships that a linear model may not fully capture. These findings highlight the potential of using simple lifestyle metrics for stress assessment, while also indicating the need for more complex modeling techniques to account for the nuanced nature of sleep health.</p>
+</section>
+<section id="introduction" class="level1">
+<h1>2. Introduction</h1>
+<p>Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis <span class="citation" data-cites="sleep_foundation_2025">(<a href="#ref-sleep_foundation_2025" role="doc-biblioref">Sleep Foundation 2025</a>)</span>. Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about <span class="math inline">\(30 \%\)</span> of adults sleep fewer than the recommended 7 hours per night <span class="citation" data-cites="cdc_sleep_2024">(<a href="#ref-cdc_sleep_2024" role="doc-biblioref">Centers for Disease Control and Prevention 2024</a>)</span>. Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.</p>
+<p>In this project, we ask whether information about a person’s sleep duration and daily lifestyle habits can help explain or predict their self-reported stress level. This question is important because stress assessments typically rely on subjective questionnaires or clinical evaluations, which can vary among individuals and are difficult to scale. If simple, easy-to-measure variables—such as how long someone sleeps or how active they are during the day—can provide meaningful insight into stress, this could support early identification of at-risk individuals and inform recommendations for healthier sleep and lifestyle patterns.</p>
+<p>To explore this question, we analyze the Sleep Health and Lifestyle Dataset <span class="citation" data-cites="varishabatool_nd">(<a href="#ref-varishabatool_nd" role="doc-biblioref">Varishabatool n.d.</a>)</span>, which contains information on individuals’ sleep duration, sleep quality, physical activity, demographic attributes, and self-reported stress. This dataset allows us to examine behavioral patterns related to sleep, identify lifestyle factors that correlate with stress, and evaluate whether a predictive model can estimate stress levels using accessible and non-clinical lifestyle data.</p>
+</section>
+<section id="methods" class="level1">
+<h1>3. Methods</h1>
+<section id="data-loading-and-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="data-loading-and-preprocessing">3.1. Data Loading and Preprocessing</h2>
+<p>The Sleep Health and Lifestyle Dataset is publicly released on <a href="https://www.kaggle.com/datasets/varishabatool/disorder">Kaggle</a> under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a> license. We use one of its <a href="https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv">GitHub mirror</a> <span class="citation" data-cites="husn_2023">(<a href="#ref-husn_2023" role="doc-biblioref">Husn 2023</a>)</span> in our analysis to avoid Kaggle authentication.</p>
+<p>The dataset has <span class="math inline">\(374\)</span> records and <span class="math inline">\(12\)</span> features. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is <code>Sleep Duration</code>, a numerical/continuous variable representing hours of sleep per night. The second is <code>Quality of Sleep</code>, a numerical/ordinal measure of self-reported quality of sleep. The third is <code>Sleep Disorder</code>, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column <code>Stress Level</code> is the level of stress assessed through interviews or questionnaires. The values range from <span class="math inline">\(3\)</span> (minimum) to <span class="math inline">\(8\)</span> (maximum). Our model will predict the stress level as numeric scores through the input features.</p>
+<p>To prepare the data for analysis, we first drop the unused columns.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-data-head-dropped" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-head-dropped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: First rows of dataset with unused columns dropped
+</figcaption>
+<div aria-describedby="tbl-data-head-dropped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="48">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">person_id</th>
+<th data-quarto-table-cell-role="th">sleep_duration</th>
+<th data-quarto-table-cell-role="th">sleep_quality</th>
+<th data-quarto-table-cell-role="th">sleep_disorder</th>
+<th data-quarto-table-cell-role="th">stress_level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>27</td>
+<td>7.8</td>
+<td>7</td>
+<td>NaN</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>17</td>
+<td>6.5</td>
+<td>5</td>
+<td>Sleep Apnea</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>328</td>
+<td>8.5</td>
+<td>9</td>
+<td>NaN</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>141</td>
+<td>7.1</td>
+<td>8</td>
+<td>NaN</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>268</td>
+<td>6.2</td>
+<td>6</td>
+<td>NaN</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>117</td>
+<td>7.2</td>
+<td>8</td>
+<td>NaN</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>324</td>
+<td>8.5</td>
+<td>9</td>
+<td>NaN</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The <code>NaN</code> values in the <code>Sleep Disorder</code> column means the individual has not been diagnosed with a sleep disorder. We replace the <code>NaN</code> values with a string value <code>No Disorder</code>.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-data-head-no-nulls" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-head-no-nulls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: First rows of dataset with null values replaced
+</figcaption>
+<div aria-describedby="tbl-data-head-no-nulls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="49">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">person_id</th>
+<th data-quarto-table-cell-role="th">sleep_duration</th>
+<th data-quarto-table-cell-role="th">sleep_quality</th>
+<th data-quarto-table-cell-role="th">sleep_disorder</th>
+<th data-quarto-table-cell-role="th">stress_level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>161</td>
+<td>7.2</td>
+<td>8</td>
+<td>No Disorder</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>45</td>
+<td>7.7</td>
+<td>7</td>
+<td>No Disorder</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>250</td>
+<td>6.5</td>
+<td>6</td>
+<td>No Disorder</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>36</td>
+<td>6.1</td>
+<td>6</td>
+<td>No Disorder</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>72</td>
+<td>6.1</td>
+<td>6</td>
+<td>No Disorder</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>258</td>
+<td>6.6</td>
+<td>7</td>
+<td>Insomnia</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>265</td>
+<td>7.3</td>
+<td>7</td>
+<td>Insomnia</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="data-spltting" class="level2">
+<h2 class="anchored" data-anchor-id="data-spltting">3.2. Data Spltting</h2>
+<p>The data is splitinto train (<span class="math inline">\(80\%\)</span>) and test (<span class="math inline">\(20\%\)</span>) sets. The train set contains 299 records.</p>
+<div class="cell" data-execution_count="5">
+<div id="tbl-descriptive-stat" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-descriptive-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Descriptive statistics of the dataset
+</figcaption>
+<div aria-describedby="tbl-descriptive-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="50">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sleep_duration</th>
+<th data-quarto-table-cell-role="th">sleep_quality</th>
+<th data-quarto-table-cell-role="th">sleep_disorder</th>
+<th data-quarto-table-cell-role="th">stress_level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>299.000000</td>
+<td>299.000000</td>
+<td>299</td>
+<td>299.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">unique</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>3</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">top</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>No Disorder</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">freq</th>
+<td>NaN</td>
+<td>NaN</td>
+<td>176</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>7.123411</td>
+<td>7.324415</td>
+<td>NaN</td>
+<td>5.377926</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">std</th>
+<td>0.802421</td>
+<td>1.217231</td>
+<td>NaN</td>
+<td>1.813719</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">min</th>
+<td>5.800000</td>
+<td>4.000000</td>
+<td>NaN</td>
+<td>3.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>6.400000</td>
+<td>6.000000</td>
+<td>NaN</td>
+<td>4.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>7.200000</td>
+<td>7.000000</td>
+<td>NaN</td>
+<td>5.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>7.800000</td>
+<td>8.000000</td>
+<td>NaN</td>
+<td>7.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">max</th>
+<td>8.500000</td>
+<td>9.000000</td>
+<td>NaN</td>
+<td>8.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#tbl-descriptive-stat" class="quarto-xref">Table&nbsp;3</a> shows the descriptive statistics of our processed dataset</p>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>4. Results</h1>
+<section id="data-validation" class="level2">
+<h2 class="anchored" data-anchor-id="data-validation">4.1. Data Validation</h2>
+<p>Before we proceed with the data, we perform a quality checks on the input data ensuring the quality of the data is to the standard.</p>
+<p>We also perform a quality check on the test data to ensure it meets the expected format and minimum quality thresholds. This validation uses a predefined schema and does not involve any data exploration or transformations that would violate the golden rule.</p>
+<p>After the quality checks are done, we will now drop the <code>Person ID</code> column. The final input data looks like <a href="#tbl-reindexed" class="quarto-xref">Table&nbsp;4</a>.</p>
+<div class="cell" data-execution_count="9">
+<div id="tbl-reindexed" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="9">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reindexed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Input training data schema
+</figcaption>
+<div aria-describedby="tbl-reindexed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="54">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sleep_duration</th>
+<th data-quarto-table-cell-role="th">sleep_quality</th>
+<th data-quarto-table-cell-role="th">sleep_disorder</th>
+<th data-quarto-table-cell-role="th">stress_level</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">person_id</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">63</th>
+<td>6.2</td>
+<td>6</td>
+<td>No Disorder</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">139</th>
+<td>7.1</td>
+<td>8</td>
+<td>No Disorder</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">74</th>
+<td>6.1</td>
+<td>6</td>
+<td>No Disorder</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">60</th>
+<td>7.7</td>
+<td>7</td>
+<td>No Disorder</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">275</th>
+<td>6.2</td>
+<td>6</td>
+<td>Sleep Apnea</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda">4.2. Exploratory Data Analysis (EDA)</h2>
+<div id="fig-eda-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eda-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/eda_summary.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eda-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Exploratory data analysis of sleep features and stress levels
+</figcaption>
+</figure>
+</div>
+<p>There’s a strong negative correlation (<span class="math inline">\(r = -0.829\)</span>, <span class="math inline">\(p = 7.188e-77\)</span>), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.</p>
+<p>An even stronger negative correlation exists (<span class="math inline">\(r = -0.904\)</span>, <span class="math inline">\(p = 1.534e-111\)</span>), suggesting that better sleep quality has a more pronounced relationship with reduced stress than sleep duration alone. The extremely low p-value confirms this is not due to chance.</p>
+<p>The violin plots reveal that individuals with no sleep disorder cluster at higher stress levels (centered around 5-6), while those with sleep apnea and insomnia show broader distributions with generally elevated stress. Insomnia cases appear to have slightly higher median stress levels than sleep apnea.</p>
+<p>The bimodal density plot suggests two distinct subpopulations in the dataset - one centered around stress level 4 and another around stress level 7-8. This could indicate fundamentally different groups, possibly corresponding to those with and without sleep-related issues.</p>
+<p>The data strongly supports that both sleep quantity and quality are inversely related to stress, with sleep quality being the stronger predictor of stress levels. Given the clear linear trends observed in the data, implementing a linear regression model such as <code>Ridge</code> would be an optimal approach to quantify how well these sleep-related features can explain variations in stress levels.</p>
+</section>
+<section id="baseline-model" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-model">4.3. Baseline Model</h2>
+<p>We separate the feature columns and the target column.</p>
+<p>We train a <code>DummyClassifier</code> as our baseline model.</p>
+<div class="cell" data-execution_count="12">
+<div id="tbl-dummy-results" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="12">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dummy-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Baseline model performance
+</figcaption>
+<div aria-describedby="tbl-dummy-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="57">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_score</th>
+<th data-quarto-table-cell-role="th">train_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.001000</td>
+<td>0.000000</td>
+<td>0.20000</td>
+<td>0.200837</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.001506</td>
+<td>0.000652</td>
+<td>0.20000</td>
+<td>0.200837</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.001009</td>
+<td>0.000000</td>
+<td>0.20000</td>
+<td>0.200837</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.001000</td>
+<td>0.000000</td>
+<td>0.20000</td>
+<td>0.200837</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.001000</td>
+<td>0.000000</td>
+<td>0.20339</td>
+<td>0.200000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#tbl-dummy-results" class="quarto-xref">Table&nbsp;5</a> shows a validation accuracy of around <span class="math inline">\(20%\)</span>. We therefore aim for a test score higher than that.</p>
+</section>
+<section id="column-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="column-transformation">4.4. Column Transformation</h2>
+<p>We will perform standard scaling on <code>Sleep Duration</code> and one-hot encoding on <code>Sleep Disorder</code>. <code>Quality of Sleep</code> contains naturally ordered integers and therefore does not require transformation.</p>
+</section>
+<section id="training-and-validation" class="level2">
+<h2 class="anchored" data-anchor-id="training-and-validation">4.5. Training and Validation</h2>
+<div class="cell" data-execution_count="14">
+<div id="tbl-cv-results" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="14">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cv-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Cross-validation results
+</figcaption>
+<div aria-describedby="tbl-cv-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="59">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">score_time</th>
+<th data-quarto-table-cell-role="th">test_neg_MSE</th>
+<th data-quarto-table-cell-role="th">train_neg_MSE</th>
+<th data-quarto-table-cell-role="th">test_r2</th>
+<th data-quarto-table-cell-role="th">train_r2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.004090</td>
+<td>0.002996</td>
+<td>-0.966525</td>
+<td>-0.939745</td>
+<td>0.735982</td>
+<td>0.702552</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.005100</td>
+<td>0.000994</td>
+<td>-1.115303</td>
+<td>-0.901239</td>
+<td>0.600846</td>
+<td>0.733666</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.003707</td>
+<td>0.001674</td>
+<td>-0.941442</td>
+<td>-0.952310</td>
+<td>0.693674</td>
+<td>0.712694</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.004002</td>
+<td>0.001679</td>
+<td>-0.769661</td>
+<td>-0.989587</td>
+<td>0.789710</td>
+<td>0.688111</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.005451</td>
+<td>0.002013</td>
+<td>-1.068692</td>
+<td>-0.914836</td>
+<td>0.641952</td>
+<td>0.726779</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The linear regression model demonstrated strong generalization with a mean cross-validated score of <span class="math inline">\(0.69\)</span>, closely matching the mean training score of <span class="math inline">\(0.71\)</span>. This indicates that the three selected features robustly explain approximately <span class="math inline">\(70%\)</span> of the variance in the target variable with minimal overfitting.</p>
+</section>
+<section id="model-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation">4.6. Model Evaluation</h2>
+<p>The linear regression model explains approximately <span class="math inline">\(52 \%\)</span> of the variance in stress levels (<span class="math inline">\(R^2 \approx 0.52\)</span>). Given that stress levels range from <span class="math inline">\(3\)</span> to <span class="math inline">\(8\)</span> (range = <span class="math inline">\(5\)</span>), the RMSE between <span class="math inline">\(1.2\)</span> to <span class="math inline">\(1.3\)</span> represents approximately <span class="math inline">\(25 \%\)</span> of this range, indicating moderate prediction accuracy.</p>
+<p>Finally, we visualize the prediction results.</p>
+<div id="fig-ridge-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ridge-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/model_analysis_prediction_plots.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ridge-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Ridge regression model performance evaluation on test data
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ridge-model" class="quarto-xref">Figure&nbsp;2</a> shows moderate predictive performance with reasonable alignment along the diagonal line, though there’s notable scatter indicating imperfect predictions, particularly for mid-range stress levels (4-6). The residual plot shows a slight negative trend, suggesting the model tends to overpredict at lower stress levels and underpredict at higher stress levels, indicating potential non-linear relationships in the data.</p>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>5. Discussion</h1>
+<section id="summary-of-findings" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-findings">5.1. Summary of Findings</h2>
+<p>The analysis revealed strong negative correlations between sleep duration, sleep quality, and stress levels, with sleep quality being the most significant predictor. The linear regression model explained approximately <span class="math inline">\(52%\)</span> of the variance in stress levels, indicating that these sleep-related features are meaningful but not exhaustive predictors of stress.</p>
+</section>
+<section id="expected-vs-actual-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="expected-vs-actual-outcomes">5.2. Expected vs Actual Outcomes</h2>
+<p>The findings aligned with our expectations that better sleep patterns would correlate with lower stress levels. However, the model’s moderate predictive accuracy suggests that while sleep is a crucial factor, other variables likely contribute significantly to stress. This highlights the complexity of stress as a multifaceted phenomenon influenced by various lifestyle, psychological, and environmental factors.</p>
+</section>
+<section id="assumptions-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-and-limitations">5.3. Assumptions and Limitations</h2>
+<p>To predict stress levels from our features, we employed Ridge regression, which implicitly assumes a linear relationship between the predictors and the target variable. This linearity assumption represents a key limitation, as real-world relationships between sleep parameters, lifestyle factors, and perceived stress are often non-linear (as suggested by some of our EDA scatter plots). Additionally, we did not incorporate polynomial or interaction terms, further restricting the model’s ability to capture more complex patterns. Another important limitation arises from the presence of outliers observed in the exploratory data analysis. Because mean squared error (MSE) is highly sensitive to outliers and is reported on a squared scale (making interpretation less intuitive), it may not have been the most robust evaluation metric. Similarly, <span class="math inline">\(R^2\)</span> assumes linearity and can be misleading when the true relationship is non-linear.</p>
+</section>
+<section id="impact-and-applications" class="level2">
+<h2 class="anchored" data-anchor-id="impact-and-applications">5.4. Impact and Applications</h2>
+<p>Understanding the relationship between sleep and stress has important implications for public health. Interventions aimed at improving sleep quality and duration could be effective strategies for stress reduction. There is however a lingering question of which direction the causality goes—does poor sleep lead to higher stress, or does high stress lead to poor sleep? Future studies could explore this bidirectional relationship further.</p>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">5.5. Future Work</h2>
+<p>Future research could establish the correct direction of causality between sleep and stress through longitudinal or experimental studies. Additionally, incorporating more comprehensive lifestyle, psychological, and physiological variables (e.g., actigraphy data, cortisol measurements, or validated anxiety/depression scales) could substantially enhance the predictive power of stress-assessment models. Exploring non-linear modeling techniques (e.g., random forests, gradient boosting, or neural networks) and polynomial/interaction terms would better capture the complex relationships evident in the data. Finally, adopting more robust and interpretable evaluation metrics—such as mean absolute error (MAE), Huber loss, or median absolute error—would reduce the influence of outliers and provide clearer insights into model performance.</p>
+</section>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">6. References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-cdc_sleep_2024" class="csl-entry" role="listitem">
+Centers for Disease Control and Prevention. 2024. <span>“FastStats: Sleep in Adults.”</span> <a href="https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html">https://www.cdc.gov/sleep/data-research/facts-stats/adults-sleep-facts-and-stats.html</a>.
+</div>
+<div id="ref-husn_2023" class="csl-entry" role="listitem">
+Husn, M. 2023. <span>“Sleep Health and Lifestyle.”</span> GitHub. <a href="https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv">https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv</a>.
+</div>
+<div id="ref-sleep_foundation_2025" class="csl-entry" role="listitem">
+Sleep Foundation. 2025. <span>“100+ Sleep Statistics – Facts and Data about Sleep 2024.”</span> <a href="https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics">https://www.sleepfoundation.org/how-sleep-works/sleep-facts-statistics</a>.
+</div>
+<div id="ref-varishabatool_nd" class="csl-entry" role="listitem">
+Varishabatool. n.d. <span>“Sleep Health and Lifestyle Dataset.”</span> Kaggle. <a href="https://www.kaggle.com/datasets/varishabatool/disorder">https://www.kaggle.com/datasets/varishabatool/disorder</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
