@@ -4,6 +4,8 @@ import matplotlib.gridspec as gridspec
 import seaborn as sns
 import click
 import os
+import sys
+from pathlib import Path
 
 from sklearn.model_selection import cross_validate
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -11,6 +13,11 @@ from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error, r2_score
+
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from src.model_utils import save_df_as_png
 
