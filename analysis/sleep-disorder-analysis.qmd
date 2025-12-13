@@ -1,6 +1,12 @@
 ---
 title: "Understanding Stress Through Sleep Patterns"
-author: "Yuheng Ouyang, Eduardo Rivera, Harpreet Singh, Songyang Yu"
+date: "2025-12-13"
+date-format: "long"
+authors: 
+  - name: Yuheng Ouyang
+  - name: Eduardo Rivera
+  - name: Harpreet Singh
+  - name: Songyang Yu
 format:
   html:
     toc: true
@@ -16,19 +22,17 @@ execute:
 
 # 1. Summary
 
-Stress has become a critical public health concern, yet its relationship with daily habits remains complex to quantify. In this project, we explore how an individual’s sleep wellness relates to their reported stress level using the Sleep Health and Lifestyle Dataset. Our goal is to investigate whether sleep patterns can help explain or predict how stressed a person feels. To do this, we perform exploratory data analysis to understand trends in the data and build a predictive model to evaluate how well sleep duration and related lifestyle variables can estimate a person’s stress level. Our analysis reveals a significant inverse relationship between sleep metrics and stress. Specifically, our model achieved an $R^2$ score of 0.51, corroborating that shorter sleep duration and lower quality are associated with higher self-reported stress. However, residual analysis suggests non-linear relationships that a linear model may not fully capture. These findings highlight the potential of using simple lifestyle metrics for stress assessment, while also indicating the need for more complex modeling techniques to account for the nuanced nature of sleep health.
+Stress has become a critical public health concern, yet its relationship with daily habits remains complex to quantify. In this project, we explore how an individual’s sleep wellness relates to their reported stress level using the Sleep Health and Lifestyle Dataset. Our goal is to investigate whether sleep patterns can help explain or predict how stressed a person feels. To do this, we perform exploratory data analysis to understand trends in the data and build a predictive model to evaluate how well sleep duration and related lifestyle variables can estimate a person’s stress level. Our analysis reveals a significant inverse relationship between sleep metrics and stress. Specifically, our model achieved an $R^2$ score of $0.51$, corroborating that shorter sleep duration and lower quality are associated with higher self-reported stress. However, residual analysis suggests non-linear relationships that a linear model may not fully capture. These findings highlight the potential of using simple lifestyle metrics for stress assessment, while also indicating the need for more complex modeling techniques to account for the nuanced nature of sleep health.
 
 # 2. Introduction
 
-Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis [@sleep_foundation_2025]. Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about 30 % of adults sleep fewer than the recommended 7 hours per night [@cdc_sleep_2024]. Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.
+Stress is a major public health concern, there are surveys consistently report that more than 1/3 of adults experience high stress on a regular basis [@sleep_foundation_2025]. Chronic stress has been linked to anxiety, cardiovascular disease, weakened immunity, and reduced productivity. At the same time, insufficient sleep is extremely common—recent population studies suggest that about $30 \%$ of adults sleep fewer than the recommended 7 hours per night [@cdc_sleep_2024]. Because sleep plays a crucial role in emotional regulation, cognitive performance, and physical recovery, disruptions in sleep duration are believed to contribute directly to increased stress levels.
 
 In this project, we ask whether information about a person’s sleep duration and daily lifestyle habits can help explain or predict their self-reported stress level. This question is important because stress assessments typically rely on subjective questionnaires or clinical evaluations, which can vary among individuals and are difficult to scale. If simple, easy-to-measure variables—such as how long someone sleeps or how active they are during the day—can provide meaningful insight into stress, this could support early identification of at-risk individuals and inform recommendations for healthier sleep and lifestyle patterns.
 
 To explore this question, we analyze the Sleep Health and Lifestyle Dataset [@varishabatool_nd], which contains information on individuals’ sleep duration, sleep quality, physical activity, demographic attributes, and self-reported stress. This dataset allows us to examine behavioral patterns related to sleep, identify lifestyle factors that correlate with stress, and evaluate whether a predictive model can estimate stress levels using accessible and non-clinical lifestyle data.
 
 # 3. Methods
-
-## 3.1. Imports
 
 ```{python}
 # Data wrangling libraries
@@ -63,7 +67,7 @@ from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCor
 from deepchecks.tabular import Dataset
 ```
 
-## 3.2. Data Loading and Preprocessing
+## 3.1. Data Loading and Preprocessing
 
 The Sleep Health and Lifestyle Dataset is publicly released on [Kaggle](https://www.kaggle.com/datasets/varishabatool/disorder) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license. We use one of its [GitHub mirror](https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle/main/data.csv) [@husn_2023] in our analysis to avoid Kaggle authentication.
 
@@ -72,9 +76,9 @@ url = "https://raw.githubusercontent.com/Muhanad-husn/Sleep-Health-and-Lifestyle
 df = pd.read_csv(url)
 ```
 
-The dataset has 374 records and 12 features. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is `Sleep Duration`, a numerical/continuous variable representing hours of sleep per night. The second is `Quality of Sleep`, a numerical/ordinal measure of self-reported quality of sleep. The third is `Sleep Disorder`, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column `Stress Level` is the level of stress assessed through interviews or questionnaires. The values range from 3 (minimum) to 8 (maximum). Our model will predict the stress level as numeric scores through the input features.
+The dataset has $374$ records and $12$ features. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is `Sleep Duration`, a numerical/continuous variable representing hours of sleep per night. The second is `Quality of Sleep`, a numerical/ordinal measure of self-reported quality of sleep. The third is `Sleep Disorder`, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column `Stress Level` is the level of stress assessed through interviews or questionnaires. The values range from $3$ (minimum) to $8$ (maximum). Our model will predict the stress level as numeric scores through the input features.
 
-To prepare the data for analysis, we first drop the unused columns. 
+To prepare the data for analysis, we first drop the unused columns.
 
 ```{python}
 #| label: tbl-data-head-dropped
@@ -113,9 +117,9 @@ df_clean[["sleep_disorder"]] = df_clean[["sleep_disorder"]].fillna("No Disorder"
 df_clean.sample(7).reset_index(drop=True)
 ```
 
-## 3.3. Data Spltting
+## 3.2. Data Spltting
 
-The data is splitinto train (80%) and test (20%) sets. The train set contains 299 records. 
+The data is splitinto train ($80\%$) and test ($20\%$) sets. The train set contains 299 records.
 
 ```{python}
 #| label: tbl-descriptive-stat
@@ -130,7 +134,7 @@ train_df.drop(columns=['person_id']).describe(include="all")
 
 # 4. Results
 
-## 4.1 Data Validation
+## 4.1. Data Validation
 
 Before we proceed with the data, we perform a quality checks on the input data ensuring the quality of the data is to the standard.
 
@@ -177,24 +181,19 @@ test_df.set_index('person_id', inplace=True)
 train_df.head()
 ```
 
-## 4.2 Exploratory Data Analysis (EDA)
+## 4.2. Exploratory Data Analysis (EDA)
 
 ![Exploratory data analysis of sleep features and stress levels](../results/eda_summary.png){#fig-eda-summary width="60%"}
 
-### (a) Sleep Duration vs Stress
-There's a strong negative correlation (r = -0.829, p = 7.188e-77), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.
+There's a strong negative correlation ($r = -0.829$, $p = 7.188e-77$), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.
 
-### (b) Quality of Sleep vs Stress
-An even stronger negative correlation exists (r = -0.904, p = 1.534e-111), suggesting that better sleep quality has a more pronounced relationship with reduced stress than sleep duration alone. The extremely low p-value confirms this is not due to chance.
+An even stronger negative correlation exists ($r = -0.904$, $p = 1.534e-111$), suggesting that better sleep quality has a more pronounced relationship with reduced stress than sleep duration alone. The extremely low p-value confirms this is not due to chance.
 
-### (c) Sleep Disorders and Stress Distribution
 The violin plots reveal that individuals with no sleep disorder cluster at higher stress levels (centered around 5-6), while those with sleep apnea and insomnia show broader distributions with generally elevated stress. Insomnia cases appear to have slightly higher median stress levels than sleep apnea.
 
-### (d) Overall Stress Distribution
 The bimodal density plot suggests two distinct subpopulations in the dataset - one centered around stress level 4 and another around stress level 7-8. This could indicate fundamentally different groups, possibly corresponding to those with and without sleep-related issues.
 
-### Overall Summary and Future Directions
-The data strongly supports that both sleep quantity and quality are inversely related to stress, with sleep quality being the stronger predictor of stress levels. Given the clear linear trends observed in the data, implementing a Linear Regression model such as Ridge Regression would be an optimal approach to quantify how well these sleep-related features can explain variations in stress levels.
+The data strongly supports that both sleep quantity and quality are inversely related to stress, with sleep quality being the stronger predictor of stress levels. Given the clear linear trends observed in the data, implementing a linear regression model such as `Ridge` would be an optimal approach to quantify how well these sleep-related features can explain variations in stress levels.
 
 ```{python}
 # Validate training data for anomalous correlations:
@@ -225,9 +224,9 @@ if not check_feat_feat_corr_result.passed_conditions():
     raise ValueError("Feature–feature correlation exceeds the maximum acceptable threshold.")
 ```
 
-## 4.3 Baseline Model
+## 4.3. Baseline Model
 
-We separate the feature columns and the target column. 
+We separate the feature columns and the target column.
 
 ```{python}
 X_train = train_df.drop(columns=["stress_level"])
@@ -236,7 +235,7 @@ X_test = test_df.drop(columns=["stress_level"])
 y_test = test_df["stress_level"]
 ```
 
-We train a `DummyClassifier` as our baseline model. 
+We train a `DummyClassifier` as our baseline model.
 
 ```{python}
 #| label: tbl-dummy-results
@@ -256,13 +255,11 @@ dummy_df = pd.DataFrame(dummy_scores)
 dummy_df
 ```
 
-@tbl-dummy-results shows a validation accuracy of around 20%. We therefore aim for a test score higher than that. 
+@tbl-dummy-results shows a validation accuracy of around $20%$. We therefore aim for a test score higher than that.
 
-## 4.4 Column Transformation
+## 4.4. Column Transformation
 
-We will perform standard scaling on `Sleep Duration` and one-hot encoding on `Sleep Disorder`. `Quality of Sleep` contains naturally ordered integers and therefore does not require transformation. 
-
-We set up a `ColumnTransformer` to use in the pipeline.  
+We will perform standard scaling on `Sleep Duration` and one-hot encoding on `Sleep Disorder`. `Quality of Sleep` contains naturally ordered integers and therefore does not require transformation.
 
 ```{python}
 preprocesser = make_column_transformer(
@@ -298,11 +295,11 @@ cv_results_df = pd.DataFrame(cv_results).rename(columns={
 cv_results_df
 ```
 
-The linear regression model demonstrated strong generalization with a mean cross-validated score of 0.69, closely matching the mean training score of 0.71. This indicates that the three selected features robustly explain approximately 70% of the variance in the target variable with minimal overfitting.
+The linear regression model demonstrated strong generalization with a mean cross-validated score of $0.69$, closely matching the mean training score of $0.71$. This indicates that the three selected features robustly explain approximately $70%$ of the variance in the target variable with minimal overfitting.
 
 ## 4.6. Model Evaluation
 
-The linear regression model explains approximately **52%** of the variance in stress levels ($R^2 \approx 0.52$). Given that stress levels range from 3 to 8 (range = 5), the RMSE between 1.2 to 1.3 represents approximately **25%** of this range, indicating moderate prediction accuracy.
+The linear regression model explains approximately $52 \%$ of the variance in stress levels ($R^2 \approx 0.52$). Given that stress levels range from $3$ to $8$ (range = $5$), the RMSE between $1.2$ to $1.3$ represents approximately $25 \%$ of this range, indicating moderate prediction accuracy.
 
 ```{python}
 ridge_pipe.fit(X_train, y_train)
@@ -320,27 +317,24 @@ Finally, we visualize the prediction results.
 
 # 5. Discussion
 
-## Summary of Findings
+## 5.1. Summary of Findings
 
-The analysis revealed strong negative correlations between sleep duration, sleep quality, and stress levels, with sleep quality being the most significant predictor. The linear regression model explained approximately 52% of the variance in stress levels, indicating that these sleep-related features are meaningful but not exhaustive predictors of stress.
+The analysis revealed strong negative correlations between sleep duration, sleep quality, and stress levels, with sleep quality being the most significant predictor. The linear regression model explained approximately $52%$ of the variance in stress levels, indicating that these sleep-related features are meaningful but not exhaustive predictors of stress.
 
-## Expected vs Actual Outcomes
+## 5.2. Expected vs Actual Outcomes
 
 The findings aligned with our expectations that better sleep patterns would correlate with lower stress levels. However, the model's moderate predictive accuracy suggests that while sleep is a crucial factor, other variables likely contribute significantly to stress. This highlights the complexity of stress as a multifaceted phenomenon influenced by various lifestyle, psychological, and environmental factors.
 
-## Assumptions and Limitations
+## 5.3. Assumptions and Limitations
 
-To predict stress levels from our features, we employed Ridge regression, which implicitly assumes a linear relationship between the predictors and the target variable. This linearity assumption represents a key limitation, as real-world relationships between sleep parameters, lifestyle factors, and perceived stress are often non-linear (as suggested by some of our EDA scatter plots).
-Additionally, we did not incorporate polynomial or interaction terms, further restricting the model’s ability to capture more complex patterns.
-Another important limitation arises from the presence of outliers observed in the exploratory data analysis. Because mean squared error (MSE) is highly sensitive to outliers and is reported on a squared scale (making interpretation less intuitive), it may not have been the most robust evaluation metric. Similarly, $R^2$ assumes linearity and can be misleading when the true relationship is non-linear. 
+To predict stress levels from our features, we employed Ridge regression, which implicitly assumes a linear relationship between the predictors and the target variable. This linearity assumption represents a key limitation, as real-world relationships between sleep parameters, lifestyle factors, and perceived stress are often non-linear (as suggested by some of our EDA scatter plots). Additionally, we did not incorporate polynomial or interaction terms, further restricting the model’s ability to capture more complex patterns. Another important limitation arises from the presence of outliers observed in the exploratory data analysis. Because mean squared error (MSE) is highly sensitive to outliers and is reported on a squared scale (making interpretation less intuitive), it may not have been the most robust evaluation metric. Similarly, $R^2$ assumes linearity and can be misleading when the true relationship is non-linear.
 
-## Impact and Applications
+## 5.4. Impact and Applications
 
 Understanding the relationship between sleep and stress has important implications for public health. Interventions aimed at improving sleep quality and duration could be effective strategies for stress reduction. There is however a lingering question of which direction the causality goes—does poor sleep lead to higher stress, or does high stress lead to poor sleep? Future studies could explore this bidirectional relationship further.
 
-## Future Work
+## 5.5. Future Work
 
 Future research could establish the correct direction of causality between sleep and stress through longitudinal or experimental studies. Additionally, incorporating more comprehensive lifestyle, psychological, and physiological variables (e.g., actigraphy data, cortisol measurements, or validated anxiety/depression scales) could substantially enhance the predictive power of stress-assessment models. Exploring non-linear modeling techniques (e.g., random forests, gradient boosting, or neural networks) and polynomial/interaction terms would better capture the complex relationships evident in the data. Finally, adopting more robust and interpretable evaluation metrics—such as mean absolute error (MAE), Huber loss, or median absolute error—would reduce the influence of outliers and provide clearer insights into model performance.
 
 # 6. References
-

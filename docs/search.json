@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html",
+    "href": "analysis/sleep-disorder-analysis.html",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "",
+    "text": "Stress has become a critical public health concern, yet its relationship with daily habits remains complex to quantify. In this project, we explore how an individual’s sleep wellness relates to their reported stress level using the Sleep Health and Lifestyle Dataset. Our goal is to investigate whether sleep patterns can help explain or predict how stressed a person feels. To do this, we perform exploratory data analysis to understand trends in the data and build a predictive model to evaluate how well sleep duration and related lifestyle variables can estimate a person’s stress level. Our analysis reveals a significant inverse relationship between sleep metrics and stress. Specifically, our model achieved an \\(R^2\\) score of \\(0.51\\), corroborating that shorter sleep duration and lower quality are associated with higher self-reported stress. However, residual analysis suggests non-linear relationships that a linear model may not fully capture. These findings highlight the potential of using simple lifestyle metrics for stress assessment, while also indicating the need for more complex modeling techniques to account for the nuanced nature of sleep health."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#imports",
+    "href": "analysis/sleep-disorder-analysis.html#imports",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "3.1. Imports",
+    "text": "3.1. Imports"
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#data-loading-and-preprocessing",
+    "href": "analysis/sleep-disorder-analysis.html#data-loading-and-preprocessing",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "3.1. Data Loading and Preprocessing",
+    "text": "3.1. Data Loading and Preprocessing\nThe Sleep Health and Lifestyle Dataset is publicly released on Kaggle under CC0 license. We use one of its GitHub mirror (Husn 2023) in our analysis to avoid Kaggle authentication.\nThe dataset has \\(374\\) records and \\(12\\) features. In our analysis, we evaluate the relationships between stress level and three features about sleep wellness. The first feature is Sleep Duration, a numerical/continuous variable representing hours of sleep per night. The second is Quality of Sleep, a numerical/ordinal measure of self-reported quality of sleep. The third is Sleep Disorder, a categorical variable indicating diagnosed sleep disorder (None, Insomnia, or Sleep Apnea). The target column Stress Level is the level of stress assessed through interviews or questionnaires. The values range from \\(3\\) (minimum) to \\(8\\) (maximum). Our model will predict the stress level as numeric scores through the input features.\nTo prepare the data for analysis, we first drop the unused columns.\n\n\n\n\nTable 1: First rows of dataset with unused columns dropped\n\n\n\n\n\n\n\n\n\n\nperson_id\nsleep_duration\nsleep_quality\nsleep_disorder\nstress_level\n\n\n\n\n0\n134\n7.1\n8\nNaN\n4\n\n\n1\n212\n7.8\n8\nNaN\n5\n\n\n2\n87\n7.2\n8\nNaN\n4\n\n\n3\n300\n8.5\n9\nNaN\n3\n\n\n4\n22\n7.7\n7\nNaN\n6\n\n\n5\n175\n7.6\n8\nNaN\n5\n\n\n6\n369\n8.1\n9\nSleep Apnea\n3\n\n\n\n\n\n\n\n\n\n\nThe NaN values in the Sleep Disorder column means the individual has not been diagnosed with a sleep disorder. We replace the NaN values with a string value No Disorder.\n\n\n\n\nTable 2: First rows of dataset with null values replaced\n\n\n\n\n\n\n\n\n\n\nperson_id\nsleep_duration\nsleep_quality\nsleep_disorder\nstress_level\n\n\n\n\n0\n120\n7.2\n8\nNo Disorder\n4\n\n\n1\n325\n8.3\n9\nNo Disorder\n3\n\n\n2\n362\n8.2\n9\nSleep Apnea\n3\n\n\n3\n231\n6.6\n7\nInsomnia\n4\n\n\n4\n64\n6.2\n6\nNo Disorder\n8\n\n\n5\n37\n6.1\n6\nNo Disorder\n8\n\n\n6\n72\n6.1\n6\nNo Disorder\n8"
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#data-spltting",
+    "href": "analysis/sleep-disorder-analysis.html#data-spltting",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "3.2. Data Spltting",
+    "text": "3.2. Data Spltting\nThe data is splitinto train (\\(80\\%\\)) and test (\\(20\\%\\)) sets. The train set contains 299 records.\n\n\n\n\nTable 3: Descriptive statistics of the dataset\n\n\n\n\n\n\n\n\n\n\nsleep_duration\nsleep_quality\nsleep_disorder\nstress_level\n\n\n\n\ncount\n299.000000\n299.000000\n299\n299.000000\n\n\nunique\nNaN\nNaN\n3\nNaN\n\n\ntop\nNaN\nNaN\nNo Disorder\nNaN\n\n\nfreq\nNaN\nNaN\n176\nNaN\n\n\nmean\n7.123411\n7.324415\nNaN\n5.377926\n\n\nstd\n0.802421\n1.217231\nNaN\n1.813719\n\n\nmin\n5.800000\n4.000000\nNaN\n3.000000\n\n\n25%\n6.400000\n6.000000\nNaN\n4.000000\n\n\n50%\n7.200000\n7.000000\nNaN\n5.000000\n\n\n75%\n7.800000\n8.000000\nNaN\n7.000000\n\n\nmax\n8.500000\n9.000000\nNaN\n8.000000\n\n\n\n\n\n\n\n\n\n\nTable 3 shows the descriptive statistics of our processed dataset"
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#data-validation",
+    "href": "analysis/sleep-disorder-analysis.html#data-validation",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.1. Data Validation",
+    "text": "4.1. Data Validation\nBefore we proceed with the data, we perform a quality checks on the input data ensuring the quality of the data is to the standard.\nWe also perform a quality check on the test data to ensure it meets the expected format and minimum quality thresholds. This validation uses a predefined schema and does not involve any data exploration or transformations that would violate the golden rule.\nAfter the quality checks are done, we will now drop the Person ID column. The final input data looks like Table 4.\n\n\n\n\nTable 4: Input training data schema\n\n\n\n\n\n\n\n\n\n\nsleep_duration\nsleep_quality\nsleep_disorder\nstress_level\n\n\nperson_id\n\n\n\n\n\n\n\n\n63\n6.2\n6\nNo Disorder\n8\n\n\n139\n7.1\n8\nNo Disorder\n4\n\n\n74\n6.1\n6\nNo Disorder\n8\n\n\n60\n7.7\n7\nNo Disorder\n6\n\n\n275\n6.2\n6\nSleep Apnea\n8"
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#exploratory-data-analysis-eda",
+    "href": "analysis/sleep-disorder-analysis.html#exploratory-data-analysis-eda",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.2. Exploratory Data Analysis (EDA)",
+    "text": "4.2. Exploratory Data Analysis (EDA)\n\n\n\n\n\n\nFigure 1: Exploratory data analysis of sleep features and stress levels\n\n\n\nThere’s a strong negative correlation (\\(r = -0.829\\), \\(p = 7.188e-77\\)), indicating that longer sleep duration is significantly associated with lower stress levels. This relationship is highly statistically significant.\nAn even stronger negative correlation exists (\\(r = -0.904\\), \\(p = 1.534e-111\\)), suggesting that better sleep quality has a more pronounced relationship with reduced stress than sleep duration alone. The extremely low p-value confirms this is not due to chance.\nThe violin plots reveal that individuals with no sleep disorder cluster at higher stress levels (centered around 5-6), while those with sleep apnea and insomnia show broader distributions with generally elevated stress. Insomnia cases appear to have slightly higher median stress levels than sleep apnea.\nThe bimodal density plot suggests two distinct subpopulations in the dataset - one centered around stress level 4 and another around stress level 7-8. This could indicate fundamentally different groups, possibly corresponding to those with and without sleep-related issues.\nThe data strongly supports that both sleep quantity and quality are inversely related to stress, with sleep quality being the stronger predictor of stress levels. Given the clear linear trends observed in the data, implementing a linear regression model such as Ridge would be an optimal approach to quantify how well these sleep-related features can explain variations in stress levels."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#baseline-model",
+    "href": "analysis/sleep-disorder-analysis.html#baseline-model",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.3. Baseline Model",
+    "text": "4.3. Baseline Model\nWe separate the feature columns and the target column.\nWe train a DummyClassifier as our baseline model.\n\n\n\n\nTable 5: Baseline model performance\n\n\n\n\n\n\n\n\n\n\nfit_time\nscore_time\ntest_score\ntrain_score\n\n\n\n\n0\n0.001040\n0.000997\n0.20000\n0.200837\n\n\n1\n0.000998\n0.000000\n0.20000\n0.200837\n\n\n2\n0.001000\n0.000000\n0.20000\n0.200837\n\n\n3\n0.001020\n0.000000\n0.20000\n0.200837\n\n\n4\n0.000617\n0.001086\n0.20339\n0.200000\n\n\n\n\n\n\n\n\n\n\nTable 5 shows a validation accuracy of around \\(20%\\). We therefore aim for a test score higher than that."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#column-transformation",
+    "href": "analysis/sleep-disorder-analysis.html#column-transformation",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.4. Column Transformation",
+    "text": "4.4. Column Transformation\nWe will perform standard scaling on Sleep Duration and one-hot encoding on Sleep Disorder. Quality of Sleep contains naturally ordered integers and therefore does not require transformation."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#training-and-validation",
+    "href": "analysis/sleep-disorder-analysis.html#training-and-validation",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.5. Training and Validation",
+    "text": "4.5. Training and Validation\n\n\n\n\nTable 6: Cross-validation results\n\n\n\n\n\n\n\n\n\n\nfit_time\nscore_time\ntest_neg_MSE\ntrain_neg_MSE\ntest_r2\ntrain_r2\n\n\n\n\n0\n0.006200\n0.002000\n-0.966525\n-0.939745\n0.735982\n0.702552\n\n\n1\n0.003512\n0.002677\n-1.115303\n-0.901239\n0.600846\n0.733666\n\n\n2\n0.004512\n0.002000\n-0.941442\n-0.952310\n0.693674\n0.712694\n\n\n3\n0.004180\n0.002007\n-0.769661\n-0.989587\n0.789710\n0.688111\n\n\n4\n0.003999\n0.002519\n-1.068692\n-0.914836\n0.641952\n0.726779\n\n\n\n\n\n\n\n\n\n\nThe linear regression model demonstrated strong generalization with a mean cross-validated score of \\(0.69\\), closely matching the mean training score of \\(0.71\\). This indicates that the three selected features robustly explain approximately \\(70%\\) of the variance in the target variable with minimal overfitting."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#model-evaluation",
+    "href": "analysis/sleep-disorder-analysis.html#model-evaluation",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "4.6. Model Evaluation",
+    "text": "4.6. Model Evaluation\nThe linear regression model explains approximately \\(52 \\%\\) of the variance in stress levels (\\(R^2 \\approx 0.52\\)). Given that stress levels range from \\(3\\) to \\(8\\) (range = \\(5\\)), the RMSE between \\(1.2\\) to \\(1.3\\) represents approximately \\(25 \\%\\) of this range, indicating moderate prediction accuracy.\nFinally, we visualize the prediction results.\n\n\n\n\n\n\nFigure 2: Ridge regression model performance evaluation on test data\n\n\n\nFigure 2 shows moderate predictive performance with reasonable alignment along the diagonal line, though there’s notable scatter indicating imperfect predictions, particularly for mid-range stress levels (4-6). The residual plot shows a slight negative trend, suggesting the model tends to overpredict at lower stress levels and underpredict at higher stress levels, indicating potential non-linear relationships in the data."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#summary-of-findings",
+    "href": "analysis/sleep-disorder-analysis.html#summary-of-findings",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "5.1. Summary of Findings",
+    "text": "5.1. Summary of Findings\nThe analysis revealed strong negative correlations between sleep duration, sleep quality, and stress levels, with sleep quality being the most significant predictor. The linear regression model explained approximately \\(52%\\) of the variance in stress levels, indicating that these sleep-related features are meaningful but not exhaustive predictors of stress."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#expected-vs-actual-outcomes",
+    "href": "analysis/sleep-disorder-analysis.html#expected-vs-actual-outcomes",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "5.2. Expected vs Actual Outcomes",
+    "text": "5.2. Expected vs Actual Outcomes\nThe findings aligned with our expectations that better sleep patterns would correlate with lower stress levels. However, the model’s moderate predictive accuracy suggests that while sleep is a crucial factor, other variables likely contribute significantly to stress. This highlights the complexity of stress as a multifaceted phenomenon influenced by various lifestyle, psychological, and environmental factors."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#assumptions-and-limitations",
+    "href": "analysis/sleep-disorder-analysis.html#assumptions-and-limitations",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "5.3. Assumptions and Limitations",
+    "text": "5.3. Assumptions and Limitations\nTo predict stress levels from our features, we employed Ridge regression, which implicitly assumes a linear relationship between the predictors and the target variable. This linearity assumption represents a key limitation, as real-world relationships between sleep parameters, lifestyle factors, and perceived stress are often non-linear (as suggested by some of our EDA scatter plots). Additionally, we did not incorporate polynomial or interaction terms, further restricting the model’s ability to capture more complex patterns. Another important limitation arises from the presence of outliers observed in the exploratory data analysis. Because mean squared error (MSE) is highly sensitive to outliers and is reported on a squared scale (making interpretation less intuitive), it may not have been the most robust evaluation metric. Similarly, \\(R^2\\) assumes linearity and can be misleading when the true relationship is non-linear."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#impact-and-applications",
+    "href": "analysis/sleep-disorder-analysis.html#impact-and-applications",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "5.4. Impact and Applications",
+    "text": "5.4. Impact and Applications\nUnderstanding the relationship between sleep and stress has important implications for public health. Interventions aimed at improving sleep quality and duration could be effective strategies for stress reduction. There is however a lingering question of which direction the causality goes—does poor sleep lead to higher stress, or does high stress lead to poor sleep? Future studies could explore this bidirectional relationship further."
+  },
+  {
+    "objectID": "analysis/sleep-disorder-analysis.html#future-work",
+    "href": "analysis/sleep-disorder-analysis.html#future-work",
+    "title": "Understanding Stress Through Sleep Patterns",
+    "section": "5.5. Future Work",
+    "text": "5.5. Future Work\nFuture research could establish the correct direction of causality between sleep and stress through longitudinal or experimental studies. Additionally, incorporating more comprehensive lifestyle, psychological, and physiological variables (e.g., actigraphy data, cortisol measurements, or validated anxiety/depression scales) could substantially enhance the predictive power of stress-assessment models. Exploring non-linear modeling techniques (e.g., random forests, gradient boosting, or neural networks) and polynomial/interaction terms would better capture the complex relationships evident in the data. Finally, adopting more robust and interpretable evaluation metrics—such as mean absolute error (MAE), Huber loss, or median absolute error—would reduce the influence of outliers and provide clearer insights into model performance."
+  }
+]
