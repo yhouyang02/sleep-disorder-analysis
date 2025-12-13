@@ -1,7 +1,7 @@
 """
 Tests for scripts/eda.py - Exploratory Data Analysis script
 
-some of the test performed in this file are:
+some of the tests performed in this file are:
 - Test good input: valid data with all required columns creates output file.
 - Test good input: filters training data correctly when train column exists.
 - Test bad input: missing train column uses all data with warning.
