@@ -1,13 +1,13 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
 import click
 import os
+import sys
+from pathlib import Path
 
 from sklearn.model_selection import cross_validate
-from sklearn.dummy import DummyClassifier
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
@@ -15,34 +15,11 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error, r2_score
 
 
-def save_df_as_png(df, filename, title=None):
-    """
-    Saves a pandas DataFrame as a PNG table.
-    """
-    fig, ax = plt.subplots(figsize=(len(df.columns) * 2.5, len(df) * 0.8 + 1))
-    ax.axis("off")
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
-    # Create table
-    table = ax.table(
-        cellText=df.values, colLabels=df.columns, loc="center", cellLoc="center"
-    )
-
-    # Style table
-    table.auto_set_font_size(False)
-    table.set_fontsize(12)
-    table.scale(1, 1.5)
-
-    if title:
-        plt.title(title, fontsize=16, fontweight="bold", pad=20)
-
-    plt.tight_layout()
-    try:
-        plt.savefig(filename, bbox_inches="tight", dpi=150)
-        print(f"Table saved to '{filename}'")
-    except Exception as e:
-        print(f"Error saving table '{filename}': {e}")
-    finally:
-        plt.close(fig)
+from src.model_utils import save_df_as_png
 
 
 @click.command()

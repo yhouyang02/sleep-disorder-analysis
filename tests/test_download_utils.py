@@ -1,6 +1,12 @@
 import os
 import pandas as pd
 import pytest
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from src.download_utils import download_csv
 
@@ -27,7 +33,8 @@ def test_download_csv_missing_local_file_raises(tmp_path):
 
     with pytest.raises(FileNotFoundError):
         download_csv(str(missing_input), str(output_file))
-    
+
+
 def test_download_csv_empty_input(tmp_path):
     """download_csv should still work with empty case."""
     input_df = pd.DataFrame({"a": []})
