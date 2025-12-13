@@ -103,6 +103,26 @@ If you follow either the Docker or Conda environment setup methods above, you wi
 
 You can also run the analysis interactively in a Jupyter Notebook. After setting up the Conda environment as described above, launch Jupyter Lab and navigate to `analysis/sleep-disorder-analysis.ipynb`. Select an appropriate kernel (e.g., `dsci522` when run locally or `base` when run in a Docker container) and run the notebook cells to see the code and results.
 
+### Using Make (Alternative Method)
+
+We provide a `Makefile` to automate the entire analysis pipeline. From the root of this repository, run:
+```bash
+# 1. Clean the directory before the analysis (recommended)
+make clean
+
+# 2. Run the complete analysis
+make all
+
+```
+
+This will execute all steps: data download, cleaning, EDA, modeling, and report generation.
+
+Other useful commands:
+- `make docs/sleep-disorder-analysis.html` - Generate HTML report only
+- `make docs/sleep-disorder-analysis.pdf` - Generate PDF report only
+
+The Makefile automatically manages dependencies and only re-runs steps when input files change, making it efficient for iterative development.
+
 ## Dependencies
 
 To run this project, the following tools and Python packages are required:
