@@ -11,7 +11,6 @@ some of the tests performed in this file are:
 - Test error input: missing required columns should raise KeyError.
 """
 
-import os
 import sys
 import pandas as pd
 import pytest
