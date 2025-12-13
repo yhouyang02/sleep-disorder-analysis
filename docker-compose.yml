@@ -1,0 +1,10 @@
+services:
+  analysis-env:
+    image: yhouyang02/dsci522-project-group01:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan/work
+    working_dir: /home/jovyan/work
+    stdin_open: true
+    tty: true

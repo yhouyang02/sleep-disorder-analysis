@@ -19,9 +19,13 @@ The dataset used in this project is the [*Sleep Health and Lifestyle Dataset*](h
 
 Make sure you have [Docker](https://www.docker.com/get-started/) installed and running.
 
-Pull the docker image from Docker Hub:
+Pull the container image and run the container:
 
 ```bash
+docker-compose up
+```
+
+<!-- ```bash
 docker pull yhouyang02/dsci522-project-group01:latest
 ```
 
@@ -29,7 +33,7 @@ Run the docker container:
 
 ```bash
 docker run --rm -it -p 8888:8888 yhouyang02/dsci522-project-group01:latest
-```
+``` -->
 
 Look in the terminal for a URL like:
 
@@ -51,14 +55,8 @@ python scripts/model.py
 After the scripts finish running, run the following commands to generate the report in PDF and HTML format.
 
 ```bash
-quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
-quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
-```
-
-You can also run the full analysis using docker-compose, which combines build and execution into a single command. From the root of this repository, run:
-
-```bash
-docker-compose up --build
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir ../docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir ../docs
 ```
 
 ### In a local Conda environment
@@ -93,8 +91,8 @@ python scripts/model.py
 Run the following commands to generate the report in PDF and HTML format.
 
 ```bash
-quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
-quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
+quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir ../docs
+quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir ../docs
 ```
 
 ### Interactively with Jupyter Notebook
@@ -106,6 +104,7 @@ You can also run the analysis interactively in a Jupyter Notebook. After setting
 ### Using Make (Alternative Method)
 
 We provide a `Makefile` to automate the entire analysis pipeline. From the root of this repository, run:
+
 ```bash
 # 1. Clean the directory before the analysis (recommended)
 make clean
@@ -118,6 +117,7 @@ make all
 This will execute all steps: data download, cleaning, EDA, modeling, and report generation.
 
 Other useful commands:
+
 - `make docs/sleep-disorder-analysis.html` - Generate HTML report only
 - `make docs/sleep-disorder-analysis.pdf` - Generate PDF report only
 
