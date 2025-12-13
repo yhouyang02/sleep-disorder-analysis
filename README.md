@@ -55,6 +55,12 @@ quarto render analysis/sleep-disorder-analysis.qmd --to pdf --output-dir docs
 quarto render analysis/sleep-disorder-analysis.qmd --to html --output-dir docs
 ```
 
+You can also run the full analysis using docker-compose, which combines build and execution into a single command. From the root of this repository, run:
+
+```bash
+docker-compose up --build
+```
+
 ### In a local Conda environment
 
 Clone the project repo and create the environment using `conda-lock` (recommended) or `conda`. Run one of the following commands from the root of this repository:
