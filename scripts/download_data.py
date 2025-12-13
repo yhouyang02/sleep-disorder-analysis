@@ -52,7 +52,9 @@ def main(input_path, output_path):
                 ssl_context.check_hostname = False
                 ssl_context.verify_mode = ssl.CERT_NONE
                 # Use urllib with the SSL context to download
-                with urllib.request.urlopen(input_path, context=ssl_context) as response:
+                with urllib.request.urlopen(
+                    input_path, context=ssl_context
+                ) as response:
                     df = pd.read_csv(response)
             else:
                 raise

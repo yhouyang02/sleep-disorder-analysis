@@ -27,7 +27,8 @@ def test_download_csv_missing_local_file_raises(tmp_path):
 
     with pytest.raises(FileNotFoundError):
         download_csv(str(missing_input), str(output_file))
-    
+
+
 def test_download_csv_empty_input(tmp_path):
     """download_csv should still work with empty case."""
     input_df = pd.DataFrame({"a": []})

@@ -1,9 +1,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+
 def clean_sleep_data(df: pd.DataFrame, random_state: int = 522) -> pd.DataFrame:
     """
-    Cleans the sleep data by selecting specific columns, renaming them, 
+    Cleans the sleep data by selecting specific columns, renaming them,
     filling missing values, and adding a 'train' column for data splitting.
 
     Parameters
@@ -17,7 +18,7 @@ def clean_sleep_data(df: pd.DataFrame, random_state: int = 522) -> pd.DataFrame:
     -------
     pd.DataFrame
         The cleaned dataframe with the new 'train' column.
-    
+
     Raises
     ------
     ValueError
@@ -37,7 +38,9 @@ def clean_sleep_data(df: pd.DataFrame, random_state: int = 522) -> pd.DataFrame:
     # Check if all target columns exist
     if not set(target_columns).issubset(df.columns):
         missing = set(target_columns) - set(df.columns)
-        raise ValueError(f"The following required columns are missing from the dataframe: {missing}")
+        raise ValueError(
+            f"The following required columns are missing from the dataframe: {missing}"
+        )
 
     df_clean = df_clean[target_columns]
 
@@ -57,8 +60,10 @@ def clean_sleep_data(df: pd.DataFrame, random_state: int = 522) -> pd.DataFrame:
     # Perform train-test split to identify training indices
     # The split parameters match the notebook: test_size=0.2
     if len(df_clean) > 1:
-        train_df, _ = train_test_split(df_clean, test_size=0.2, random_state=random_state)
-        
+        train_df, _ = train_test_split(
+            df_clean, test_size=0.2, random_state=random_state
+        )
+
         # Create 'train' column: 1 for train, 0 for test
         df_clean["train"] = 0
         df_clean.loc[train_df.index, "train"] = 1
