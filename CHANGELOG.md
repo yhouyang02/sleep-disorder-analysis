@@ -1,16 +1,8 @@
 # CHANGELOG
 
-## v3.0.0 – Peer Review Changelog
+## 2025-12-12 — Peer Review Fixes (by Norton Yu)
 
-### Added docker-compose instructions to README
-Added a short subsection showing how to run the full analysis using:
-
-```bash
-docker-compose up --build
-```
-This improves usability by reducing the number of manual commands.
-
-**Evidence of change:**
-- Implemented in branch: `m4-peerreview-rsokolsnyder`
-- Code change: updated `README.md` under Docker section
-- Pull request: link_placeholder
+### Improved Docker workflow documentation
+- Added a “Using docker-compose” section to README.md  
+- This change improves reproducibility and simplifies container execution.
+- Implemented in PR #62: https://github.com/yhouyang02/sleep-disorder-analysis/pull/62
