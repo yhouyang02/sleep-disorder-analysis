@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2025-12-15 - Milestone 3 Feedback Fixes (by Yuheng Ouyang)
+
+### Suppressed warnings in scripts
+
+- Added warning suppression to Python scripts to improve output readability.
+- Implemented in [#68](https://github.com/yhouyang02/sleep-disorder-analysis/pull/68)
+
+### Used markup language syntax to reference tables and figures
+
+- This change improves report formatting and consistency.
+- Implemented in [#68](https://github.com/yhouyang02/sleep-disorder-analysis/pull/68)
+
+### Updated `docker-compose.yml` to use specific image version
+
+- This change improves reproducibility and ensures consistent container environments.
+- Implemented in [#68](https://github.com/yhouyang02/sleep-disorder-analysis/pull/68)
+
 ## 2025-12-13 - Peer Review Fixes (by Yuheng Ouyang)
 
 ### Fixed in-container rendering issues
