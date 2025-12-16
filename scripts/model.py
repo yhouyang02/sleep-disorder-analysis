@@ -6,6 +6,9 @@ import click
 import os
 import sys
 from pathlib import Path
+import warnings
+
+warnings.filterwarnings("ignore")
 
 from sklearn.model_selection import cross_validate
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
