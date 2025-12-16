@@ -16,7 +16,7 @@
 
 ### Fixed in-container rendering issues
 
-- Resolved issues with rendering HTML and PDF reports with correct execution but no oupout.
+- Resolved issues with rendering HTML and PDF reports with correct execution but no output.
 - This change improves usability and ensures consistent report generation.
 - Implemented in [#65](https://github.com/yhouyang02/sleep-disorder-analysis/pull/65).
 
@@ -69,7 +69,7 @@
 ### Enhanced data folder structure
 
 - Reorganized data folder to separate raw and processed data.
-- This changes improves project management and clarity.
+- This change improves project management and clarity.
 - Implemented in [#47](https://github.com/yhouyang02/sleep-disorder-analysis/pull/47).
 
 ### Enhanced report image/table numbering
